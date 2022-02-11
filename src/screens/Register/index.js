@@ -9,6 +9,7 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 const hideIcon = require('../../../Resources/Images/hide.png');
 const lockIcon = require('../../../Resources/Images/lock.png');
@@ -16,20 +17,21 @@ const userIcon = require('../../../Resources/Images/user.png');
 
 
 const Register = ({ navigation }) => {
+    const { t } = useTranslation()
 
     return (
         <SafeAreaView style={styles.container}>
             <View >
                 <View style={{ height: '95%' }}>
                     <Text style={styles.loginTitle}>
-                        Đăng Ký
+                        {t('register')}
                     </Text>
                     <View style={styles.emailInput}>
                         <View >
                             <Image source={userIcon} style={styles.userIcon} />
                         </View>
                         <TextInput
-                            placeholder="Email hoặc điện thoại"
+                            placeholder={t('userAccountPlaceHolder')}
                             style={styles.emailInputVal}
                         />
                     </View>
@@ -37,7 +39,7 @@ const Register = ({ navigation }) => {
                         <View style={{ flexDirection: 'row', flex: 1 }}>
                             <Image source={lockIcon} style={styles.lockIcon} />
                             <TextInput
-                                placeholder="Mật khẩu"
+                                placeholder={t('userPasswordPlaceHolder')}
                                 style={styles.passwordInputVal}
                             />
                         </View>
@@ -52,7 +54,7 @@ const Register = ({ navigation }) => {
                         <View style={{ flexDirection: 'row', flex: 1 }}>
                             <Image source={lockIcon} style={styles.lockIcon} />
                             <TextInput
-                                placeholder="Mật khẩu"
+                                placeholder={t('retypePassword')}
                                 style={styles.passwordInputVal}
                             />
                         </View>
@@ -70,7 +72,7 @@ const Register = ({ navigation }) => {
                             underlayColor='#FFFFFF'
                         >
                             <Text style={styles.textLoginButton}>
-                                ĐĂNG KÝ
+                                {t('registerUpperCase')}
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -78,7 +80,7 @@ const Register = ({ navigation }) => {
                 <View style={styles.registerBox}>
                     <View >
                         <Text style={styles.registerText}>
-                            Bạn đã có tài khoản?
+                            {t('hasAccount')}
                         </Text>
                     </View>
                     <View >
@@ -87,7 +89,7 @@ const Register = ({ navigation }) => {
                             onPress={() => navigation.navigate('Login')}
                         >
                             <Text style={styles.registerTextPress}>
-                                Đăng nhập
+                                {t('login')}
                             </Text>
                         </TouchableHighlight>
                     </View>
@@ -106,7 +108,8 @@ const styles = StyleSheet.create({
         fontFamily: 'SVN-PoppinsBold',
         fontSize: 30,
         color: '#68BD45',
-        marginBottom: 50
+        marginBottom: 50,
+        lineHeight: 35
     },
     loginButton: {
         alignSelf: 'center',
@@ -123,12 +126,14 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 16,
         fontFamily: 'SVN-PoppinsBold',
+        lineHeight: 21
     },
     emailInputVal: {
         fontSize: 14,
         fontFamily: 'SVN-Poppins',
-        width: 350,
-        height: 25
+        width: '100%',
+        height: 25,
+        lineHeight: 20
     },
     userIcon: {
         width: 20,
@@ -157,8 +162,9 @@ const styles = StyleSheet.create({
     passwordInputVal: {
         fontSize: 14,
         fontFamily: 'SVN-Poppins',
-        width: 300,
-        height: 25
+        width: '100%',
+        height: 25,
+        lineHeight: 20
     },
     forgotPasswordText: {
         textAlign: 'right',
@@ -176,12 +182,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#68BD45',
         fontFamily: 'SVN-PoppinsBold',
-        marginLeft: 3
+        marginLeft: 3,
+        lineHeight: 20
     },
     registerText: {
         color: '#68BD45',
         fontFamily: 'SVN-Poppins',
         fontSize: 14,
+        lineHeight: 20
     }
 });
 

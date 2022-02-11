@@ -10,6 +10,11 @@ import {
     StatusBar,
     TouchableHighlight
 } from 'react-native';
+import { useTranslation } from "react-i18next";
+
+import Promotion from './components/Promotion';
+import Feature from './components/Feature';
+import New from './components/New';
 
 const QR = require('../../../Resources/Images/QR.png');
 const search = require('../../../Resources/Images/search.png');
@@ -22,15 +27,14 @@ const credential = require('../../../Resources/Images/credential.png');
 const notification = require('../../../Resources/Images/notification.png');
 const star = require('../../../Resources/Images/star.png');
 const image = require('../../../Resources/Images/Image.png');
-const gift = require('../../../Resources/Images/gift.png');
 const vn = require('../../../Resources/Images/vn.png');
 const world = require('../../../Resources/Images/world.png');
 const newImage = require('../../../Resources/Images/new.png');
-const time = require('../../../Resources/Images/time.png');
 
 const Home = (props) => {
+    const { t } = useTranslation()
 
-    const DATA = [
+    const DATA_PROMOTION = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
             title: 'Tiêu đề chương trình hot mới nhất tháng 12',
@@ -51,92 +55,91 @@ const Home = (props) => {
         },
     ];
 
+    const DATA_FEATURE = [
+        {
+            id: 1,
+            image: search,
+            text: t('search')
+        },
+        {
+            id: 2,
+            image: schedule,
+            text: t('examSchedule')
+        },
+        {
+            id: 3,
+            image: injection,
+            text: t('injectionBook')
+        },
+        {
+            id: 4,
+            image: contact,
+            text: t('contact')
+        },
+        {
+            id: 5,
+            image: service,
+            text: t('serviceHighlight')
+        },
+        {
+            id: 6,
+            image: book,
+            text: t('handBook')
+        },
+        {
+            id: 7,
+            image: credential,
+            text: t('credentialCovid')
+        }
+    ]
+
     const DATA_NEW = [
         {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abba',
-            title: 'Tiêu đề chương trình hot mới nhất tháng 12',
+            id: 1,
             image: newImage,
+            title: 'Tiêu đề chương trình hot mới nhất tháng 12',
             time: '22:10, 08/02/2022'
         },
         {
-            id: '3ac68afc-c605-48d3-a4f8-fbd97f63',
-            title: 'Tiêu đề chương trình hot mới nhất tháng 12',
+            id: 2,
             image: newImage,
+            title: 'Tiêu đề chương trình hot mới nhất tháng 13',
             time: '22:10, 08/02/2022'
         },
         {
-            id: '58694a0f-3da1-471f-bd96-71e29d72',
-            title: 'Tiêu đề chương trình hot mới nhất tháng 12',
+            id: 3,
             image: newImage,
+            title: 'Tiêu đề chương trình hot mới nhất tháng 14',
             time: '22:10, 08/02/2022'
         }
     ]
 
-    const Promotion = (props) => (
-        <View style={{ width: 180 }}>
-            <View style={{ marginBottom: 10 }}>
-                <Image source={props.image} />
-            </View>
-            <Text style={styles.titlePromotion}>
-                {props.title}
-            </Text>
-            <Text style={styles.subTitlePromotion}>
-                {props.subTitle}
-            </Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View style={{ marginRight: 5 }}>
-                    <Image source={gift} />
-                </View>
-                <View >
-                    <Text style={{ fontFamily: 'SVN-PoppinsSemiBold', color: '#68BD45', fontSize: 12 }}>
-                        Nhận ưu đãi
-                    </Text>
-                </View>
-            </View>
-        </View>
+    const renderItemNew = ({ item }) => (
+        <New {...item} />
     );
-
-    const NewComponent = (props) => {
-        return (
-            <View >
-                <Image source={props.image} />
-                <View style={{ width: 150, color: '#2B2B2B', fontFamily: 'SVN-Poppins', fontSize: 14, lineHeight: 20, marginVertical: 10 }}>
-                    <Text >
-                        {props.title}
-                    </Text>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Image source={time} style={{ marginRight: 5 }} />
-                    <Text style={{ fontFamily: 'SVN-Poppins', fontSize: 12, color: '#68BD45' }}>
-                        {props.time}
-                    </Text>
-                </View>
-            </View>
-        )
-    };
-
-    const renderItemNew = ({ item }) => {
-        <NewComponent {...item} />
-    }
 
     const renderItemPromotion = ({ item }) => (
         <Promotion {...item} />
     );
 
+    const renderItemFeature = ({ item }) => (
+        <Feature {...item} />
+    );
+
     return (
         <SafeAreaView style={{ backgroundColor: '#F8F8F8' }}>
+            <StatusBar barStyle='dark-content' />
             <ScrollView
                 showsVerticalScrollIndicator={false}
             >
                 <View style={styles.container}>
-                    <StatusBar barStyle='dark-content' />
                     <View style={styles.homeTitleBox}>
                         <View >
                             <Text style={styles.homeTitle}>
                                 Medical Check-up
                             </Text>
                             <Text style={styles.homeSubTitle}>
-                                Ứng dụng hỗ trợ theo dõi sức khoẻ
+                                {t('subTitleApp')}
                             </Text>
                         </View>
                         <TouchableHighlight
@@ -147,119 +150,11 @@ const Home = (props) => {
                             <Image source={QR} />
                         </TouchableHighlight>
                     </View>
-                    <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                        <TouchableHighlight
-                            onPress={() => { }}
-                            underlayColor='#F8F8F8'
-                        >
-                            <View style={styles.homeFeatureBox}>
-                                <View >
-                                    <Image source={search} />
-                                </View>
-                                <View style={{ marginTop: 5 }}>
-                                    <Text style={styles.homeFeatureText}>
-                                        Tìm kiếm
-                                    </Text>
-                                </View>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            onPress={() => { }}
-                            underlayColor='#F8F8F8'
-                        >
-                            <View style={styles.homeFeatureBox}>
-                                <View >
-                                    <Image source={schedule} />
-                                </View>
-                                <View style={{ marginTop: 5 }}>
-                                    <Text style={styles.homeFeatureText}>
-                                        Lịch khám
-                                    </Text>
-                                </View>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            onPress={() => { }}
-                            underlayColor='#F8F8F8'
-                        >
-                            <View style={styles.homeFeatureBox}>
-                                <View >
-                                    <Image source={injection} />
-                                </View>
-                                <View style={{ marginTop: 5 }}>
-                                    <Text style={styles.homeFeatureText}>
-                                        Sổ tiêm
-                                    </Text>
-                                </View>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            onPress={() => { }}
-                            underlayColor='#F8F8F8'
-                        >
-                            <View style={styles.homeFeatureBox}>
-                                <View >
-                                    <Image source={contact} />
-                                </View>
-                                <View style={{ marginTop: 5 }}>
-                                    <Text style={styles.homeFeatureText}>
-                                        Liên hệ
-                                    </Text>
-                                </View>
-                            </View>
-                        </TouchableHighlight>
-                    </View>
-                    <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                        <TouchableHighlight
-                            onPress={() => { }}
-                            underlayColor='#F8F8F8'
-                        >
-                            <View style={styles.homeFeatureBox}>
-                                <View >
-                                    <Image source={service} />
-                                </View>
-                                <View style={{ marginTop: 5 }}>
-                                    <Text style={styles.homeFeatureText}>
-                                        {`Dịch vụ\nnổi bật`}
-                                    </Text>
-                                </View>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            onPress={() => { }}
-                            underlayColor='#F8F8F8'
-                        >
-                            <View style={styles.homeFeatureBox}>
-                                <View >
-                                    <Image source={book} />
-                                </View>
-                                <View style={{ marginTop: 5 }}>
-                                    <Text style={styles.homeFeatureText}>
-                                        {`Cẩm nang\nsức khoẻ`}
-                                    </Text>
-                                </View>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            onPress={() => { }}
-                            underlayColor='#F8F8F8'
-                        >
-                            <View style={styles.homeFeatureBox}>
-                                <View >
-                                    <Image source={credential} />
-                                </View>
-                                <View style={{ marginTop: 5 }}>
-                                    <Text style={styles.homeFeatureText}>
-                                        {`Chứng nhận\nngừa Covid`}
-                                    </Text>
-                                </View>
-                            </View>
-                        </TouchableHighlight>
-                    </View>
-                    <View style={{ marginTop: 30 }}>
+                    <FlatList data={DATA_FEATURE} renderItem={renderItemFeature} pagingEnabled horizontal={true} scrollEnabled={true} showsHorizontalScrollIndicator={false} style={{ marginTop: 20 }} />
+                    <View style={{ marginTop: 10 }}>
                         <View >
                             <Text style={styles.notificationTitle}>
-                                Thông báo quan trọng
+                                {t('importantNotification')}
                             </Text>
                         </View>
                         <View style={styles.notificationBox}>
@@ -284,10 +179,10 @@ const Home = (props) => {
                     <View style={{ marginTop: 20 }}>
                         <View >
                             <Text style={styles.notificationTitle}>
-                                Chương trình ưu đãi
+                                {t('promotion')}
                             </Text>
                         </View>
-                        <FlatList data={DATA} renderItem={renderItemPromotion} pagingEnabled horizontal={true} scrollEnabled={true} showsHorizontalScrollIndicator={false} />
+                        <FlatList data={DATA_PROMOTION} renderItem={renderItemPromotion} pagingEnabled horizontal={true} scrollEnabled={true} showsHorizontalScrollIndicator={false} />
                     </View>
                     <View
                         style={{
@@ -299,10 +194,10 @@ const Home = (props) => {
                     <View >
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={styles.notificationTitle}>
-                                Tin tức mới nhất
+                                {t('latestNews')}
                             </Text>
-                            <Text style={{ color: '#68BD45', fontSize: 12, fontFamily: 'SVN-Poppins' }}>
-                                Xem thêm
+                            <Text style={{ color: '#68BD45', fontSize: 12, fontFamily: 'SVN-Poppins', lineHeight: 25 }}>
+                                {t('more')}
                             </Text>
                         </View>
                         <View style={styles.newsBox}>
@@ -315,7 +210,7 @@ const Home = (props) => {
                                     </View>
                                     <View >
                                         <Text style={styles.newsBoxSubTitle}>
-                                            Nguồn: Bộ y tế Việt nam
+                                            {t('source')}
                                         </Text>
                                     </View>
                                 </View>
@@ -323,25 +218,25 @@ const Home = (props) => {
                                     <View >
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <Image source={vn} style={{ marginRight: 10 }} />
-                                            <Text style={{ fontFamily: 'SVN-PoppinsSemiBold', fontSize: 16, color: '#2B2B2B' }}>
-                                                Việt Nam
+                                            <Text style={styles.country}>
+                                                {t('vietnam')}
                                             </Text>
                                         </View>
                                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                             <View style={{ marginRight: 20 }}>
                                                 <Text >
-                                                    {`1.778.976\nCa nhiễm`}
+                                                    {`1.778.976\n${t('infected')}`}
                                                 </Text>
                                             </View>
                                             <View >
                                                 <Text >
-                                                    {`1.778.976\nPhục hồi`}
+                                                    {`1.778.976\n${t('recover')}`}
                                                 </Text>
                                             </View>
                                         </View>
                                         <View style={{ marginTop: 10 }}>
                                             <Text >
-                                                {`1.778.976\nTử vong`}
+                                                {`1.778.976\n${t('dead')}`}
                                             </Text>
                                         </View>
                                     </View>
@@ -349,25 +244,25 @@ const Home = (props) => {
                                     <View >
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             <Image source={world} style={{ marginRight: 10 }} />
-                                            <Text style={{ fontFamily: 'SVN-PoppinsSemiBold', fontSize: 16, color: '#2B2B2B' }}>
-                                                Thế Giới
+                                            <Text style={styles.country}>
+                                                {t('world')}
                                             </Text>
                                         </View>
                                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                             <View style={{ marginRight: 20 }}>
                                                 <Text >
-                                                    {`1.778.976\nCa nhiễm`}
+                                                    {`1.778.976\n${t('infected')}`}
                                                 </Text>
                                             </View>
                                             <View >
                                                 <Text >
-                                                    {`1.778.976\nPhục hồi`}
+                                                    {`1.778.976\n${t('recover')}`}
                                                 </Text>
                                             </View>
                                         </View>
                                         <View style={{ marginTop: 10 }}>
                                             <Text >
-                                                {`1.778.976\nTử vong`}
+                                                {`1.778.976\n${t('dead')}`}
                                             </Text>
                                         </View>
                                     </View>
@@ -375,10 +270,8 @@ const Home = (props) => {
                             </View>
                         </View>
                     </View>
-                    <View style={{ marginTop: 20, flexDirection: 'row', marginRight: 10 }}>
-                        <NewComponent title='Tiêu đề chương trình hot mới nhất tháng 12' image={newImage} time='22:10, 08/02/2022' />
-                        <NewComponent title='Tiêu đề chương trình hot mới nhất tháng 12' image={newImage} time='22:10, 08/02/2022' />
-                        <NewComponent title='Tiêu đề chương trình hot mới nhất tháng 12' image={newImage} time='22:10, 08/02/2022' />
+                    <View style={{ marginTop: 20 }} >
+                        <FlatList data={DATA_NEW} style={{ height: 200, width: '100%' }} renderItem={renderItemNew} pagingEnabled horizontal={true} scrollEnabled={true} showsHorizontalScrollIndicator={false} />
                     </View>
                 </View>
             </ScrollView>
@@ -411,21 +304,12 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center'
     },
-    homeFeatureBox: {
-        alignItems: 'center',
-        width: 90,
-    },
-    homeFeatureText: {
-        fontFamily: 'SVN-Poppins',
-        fontSize: 13,
-        lineHeight: 18,
-        textAlign: 'center'
-    },
     notificationTitle: {
         fontSize: 20,
         color: '#184A34',
         fontFamily: 'SVN-PoppinsSemiBold',
-        marginBottom: 15
+        marginBottom: 15,
+        lineHeight: 25
     },
     notificationBox: {
         width: 250,
@@ -439,19 +323,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginLeft: 10
     },
-    titlePromotion: {
-        color: '#2B2B2B',
-        fontSize: 14,
-        fontFamily: 'SVN-Poppins',
-        lineHeight: 18
-    },
-    subTitlePromotion: {
-        fontSize: 12,
-        fontFamily: 'SVN-Poppins',
-        color: '#A4A4A6',
-        marginVertical: 7,
-        lineHeight: 18
-    },
     newsBoxTitle: {
         color: '#184A34',
         fontFamily: 'SVN-PoppinsSemiBold',
@@ -460,7 +331,8 @@ const styles = StyleSheet.create({
     newsBoxSubTitle: {
         fontSize: 14,
         fontFamily: 'SVN-Poppins',
-        color: '#A4A4A6'
+        color: '#A4A4A6',
+        lineHeight: 20
     },
     newsBox: {
         width: '100%',
@@ -471,6 +343,12 @@ const styles = StyleSheet.create({
     newsBoxContent: {
         paddingHorizontal: 10,
         paddingTop: 20
+    },
+    country: {
+        fontFamily: 'SVN-PoppinsSemiBold',
+        fontSize: 16,
+        color: '#2B2B2B',
+        lineHeight: 21
     }
 });
 

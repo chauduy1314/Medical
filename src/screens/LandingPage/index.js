@@ -5,10 +5,13 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    StatusBar
 } from 'react-native';
+import { useTranslation } from "react-i18next";
 
 const LandingPage = ({ navigation }) => {
+    const { t } = useTranslation()
 
     return (
         <SafeAreaView style={styles.container}>
@@ -27,7 +30,7 @@ const LandingPage = ({ navigation }) => {
                     underlayColor='#FFFFFF'
                 >
                     <Text style={styles.textLoginButton}>
-                        ĐĂNG NHẬP
+                        {t('loginUppercase')}
                     </Text>
                 </TouchableOpacity>
                 <TouchableHighlight
@@ -36,7 +39,7 @@ const LandingPage = ({ navigation }) => {
                     underlayColor='#FFFFFF'
                 >
                     <Text style={styles.textRegisterButton}>
-                        ĐĂNG KÝ
+                        {t('registerUppercase')}
                     </Text>
                 </TouchableHighlight>
             </View>
@@ -68,11 +71,13 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 16,
         fontFamily: 'SVN-PoppinsBold',
+        lineHeight: 21
     },
     textRegisterButton: {
         color: '#68BD45',
         fontSize: 16,
         fontFamily: 'SVN-PoppinsBold',
+        lineHeight: 21
     },
     registerButton: {
         alignItems: 'center',

@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, Image, SafeAreaView, TouchableHighlight, TextInput, ScrollView, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, TouchableHighlight, TextInput, ScrollView, StatusBar, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 import TimePicker from './components/TimePicker';
 
@@ -9,10 +10,12 @@ const avatar = require('../../../Resources/Images/patient.png');
 const orange = require('../../../Resources/Images/orange.png');
 const cong = require('../../../Resources/Images/cong.png');
 const birthday = require('../../../Resources/Images/birthday.png');
+const down = require('../../../Resources/Images/down.png');
 
 const Booking = () => {
     const [date, setDate] = useState(moment(new Date()).format('DD/MM/YYYY'));
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const { t } = useTranslation()
 
     const hideDatePicker = () => {
         setDatePickerVisibility(false);
@@ -24,14 +27,14 @@ const Booking = () => {
     };
 
     return (
-        <SafeAreaView style={{ marginHorizontal: 10, height: '100%', backgroundColor: '#FFFFFF' }}>
+        <SafeAreaView style={styles.container}>
             <StatusBar barStyle='dark-content' />
             <ScrollView
                 showsVerticalScrollIndicator={false}
             >
                 <View >
-                    <Text style={{ fontFamily: 'SVN-PoppinsSemiBold', fontSize: 14, marginVertical: 20 }}>
-                        Chọn khách hàng muốn khám:
+                    <Text style={styles.titleCustomer}>
+                        {t('choosePatient')}
                     </Text>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ flexDirection: 'column', alignItems: 'center' }}>
@@ -39,11 +42,11 @@ const Booking = () => {
                                 onPress={() => { }}
                                 underlayColor='#FFFFFF'
                             >
-                                <View style={{ borderRadius: 150 / 2, borderWidth: 1, borderColor: "red", padding: 2, marginBottom: 5 }}>
+                                <View style={styles.customerBox}>
                                     <Image source={avatar} />
                                 </View>
                             </TouchableHighlight>
-                            <Text style={{ fontFamily: 'SVN-PoppinsSemiBold', fontSize: 10, color: '#2B2B2B' }}>
+                            <Text style={styles.customerName}>
                                 Trang
                             </Text>
                         </View>
@@ -52,30 +55,30 @@ const Booking = () => {
                                 onPress={() => { }}
                                 underlayColor='#FFFFFF'
                             >
-                                <View style={{ borderRadius: 150 / 2, borderWidth: 1.5, borderColor: "red", padding: 2, marginBottom: 5 }}>
+                                <View style={styles.customerBox}>
                                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                                         <Image source={orange} style={{ zIndex: 1 }} />
                                         <Image source={cong} style={{ zIndex: 2, position: 'absolute' }} />
                                     </View>
                                 </View>
                             </TouchableHighlight>
-                            <Text style={{ fontFamily: 'SVN-PoppinsSemiBold', fontSize: 10, color: '#2B2B2B' }}>
-                                Thêm
+                            <Text style={styles.customerName}>
+                                {t('add')}
                             </Text>
                         </View>
                     </View>
                 </View>
                 <View style={{ marginTop: 10 }}>
                     <Text style={{ fontFamily: 'SVN-PoppinsSemiBold', fontSize: 14, marginVertical: 10 }}>
-                        Thông tin người đặt lịch: *
+                        {t('infoBooker')}
                     </Text>
                     <View >
-                        <TextInput style={styles.input} placeholder='Họ tên' />
-                        <View style={styles.passwordContainer}>
+                        <TextInput style={styles.input} placeholder={t('name')} />
+                        <View style={styles.inputSelectedContainer}>
                             <TextInput
-                                style={styles.inputStyle}
+                                style={styles.inputSelected}
                                 autoCorrect={false}
-                                placeholder='Ngày sinh'
+                                placeholder={t('birthDay')}
                                 value={date}
                                 type='number'
                                 onFocus={() => setDatePickerVisibility(true)}
@@ -87,8 +90,20 @@ const Booking = () => {
                                 <Image source={birthday} />
                             </TouchableHighlight>
                         </View>
-                        <TextInput style={styles.input} placeholder='Số điện thoại' />
-                        <TextInput style={styles.input} placeholder='Địa điểm' />
+                        <TextInput style={styles.input} placeholder={t('phone')} />
+                        <TouchableOpacity
+                            onPress={() => { }}
+                        >
+                            <View style={styles.inputSelectedContainer}>
+                                <TextInput
+                                    style={styles.inputSelected}
+                                    autoCorrect={false}
+                                    placeholder={t('place')}
+                                    editable={false}
+                                />
+                                <Image source={down} />
+                            </View>
+                        </TouchableOpacity>
                         <DateTimePickerModal
                             isVisible={isDatePickerVisible}
                             mode="date"
@@ -101,6 +116,35 @@ const Booking = () => {
                 <View style={{ marginTop: 10 }}>
                     <TimePicker />
                 </View>
+                <View style={{ marginVertical: 10 }}>
+                    <TouchableOpacity
+                        onPress={() => { }}
+                    >
+                        <View style={styles.inputSelectedContainer}>
+                            <TextInput
+                                style={styles.inputSelected}
+                                autoCorrect={false}
+                                placeholder={t('department')}
+                                editable={false}
+                            />
+                            <Image source={down} />
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => { }}
+                    >
+                        <View style={styles.inputSelectedContainer}>
+                            <TextInput
+                                style={styles.inputSelected}
+                                autoCorrect={false}
+                                placeholder={t('specificDoctor')}
+                                editable={false}
+                            />
+                            <Image source={down} />
+                        </View>
+                    </TouchableOpacity>
+                    <TextInput style={styles.reason} />
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
@@ -109,6 +153,17 @@ const Booking = () => {
 export default Booking;
 
 const styles = StyleSheet.create({
+    container: {
+        marginHorizontal: 10,
+        height: '100%',
+        backgroundColor: '#FFFFFF'
+    },
+    titleCustomer: {
+        fontFamily: 'SVN-PoppinsSemiBold',
+        fontSize: 14,
+        marginVertical: 20,
+        lineHeight: 20
+    },
     input: {
         height: 55,
         marginVertical: 5,
@@ -118,7 +173,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F3F3F3',
         borderColor: '#FFFFFF',
     },
-    passwordContainer: {
+    inputSelectedContainer: {
         flexDirection: 'row',
         paddingBottom: 10,
         height: 55,
@@ -130,7 +185,25 @@ const styles = StyleSheet.create({
         borderColor: '#FFFFFF',
         alignItems: 'center'
     },
-    inputStyle: {
+    inputSelected: {
         flex: 1
+    },
+    reason: {
+        height: 90,
+        borderColor: '#FFFFFF',
+        backgroundColor: '#F3F3F3',
+        borderRadius: 14
+    },
+    customerBox: {
+        borderRadius: 150 / 2,
+        borderWidth: 1.5,
+        borderColor: "red",
+        padding: 2,
+        marginBottom: 5
+    },
+    customerName: {
+        fontFamily: 'SVN-PoppinsSemiBold',
+        fontSize: 10,
+        color: '#2B2B2B'
     }
 });

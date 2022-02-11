@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, SafeAreaView, TouchableHighlight, Image, StatusBar } from 'react-native';
 import React from 'react';
+import { t } from 'i18next';
 
 const avatar = require('../../../Resources/Images/face.png');
 const info = require('../../../Resources/Images/info.png');
@@ -22,7 +23,7 @@ const ConnectedProfile = () => {
                             onPress={() => { }}
                         >
                             <Text style={styles.boxInfoButtonText}>
-                                Mã ID
+                                {t('idCode')}
                             </Text>
                         </TouchableHighlight>
                     </View>
@@ -31,7 +32,7 @@ const ConnectedProfile = () => {
                             <View style={styles.rowBox}>
                                 <Image source={info} />
                                 <Text style={styles.boxRowText}>
-                                    Thông tin cá nhân
+                                    {t('personInfo')}
                                 </Text>
                             </View>
                             <Image source={next} />
@@ -40,7 +41,7 @@ const ConnectedProfile = () => {
                             <View style={styles.rowBox}>
                                 <Image source={love} />
                                 <Text style={styles.boxRowText}>
-                                    Thông tin sức khoẻ
+                                    {t('healthInfo')}
                                 </Text>
                             </View>
                             <Image source={next} />
@@ -49,7 +50,7 @@ const ConnectedProfile = () => {
                             <View style={styles.rowBox}>
                                 <Image source={love} />
                                 <Text style={styles.boxRowText}>
-                                    Hồ sơ sức khoẻ
+                                    {t('healthRecord')}
                                 </Text>
                             </View>
                             <Image source={next} />
@@ -58,7 +59,7 @@ const ConnectedProfile = () => {
                             <View style={styles.rowBox}>
                                 <Image source={love} />
                                 <Text style={styles.boxRowText}>
-                                    Trạng thái sức khoẻ
+                                    {t('healthStatus')}
                                 </Text>
                             </View>
                             <Image source={next} />
@@ -70,7 +71,7 @@ const ConnectedProfile = () => {
                     <View style={styles.clickArea}>
                         <Image source={plus} />
                         <Text style={styles.clickAreaText}>
-                            Thêm hồ sơ người thân
+                            {t('addProfilePlaceHolder')}
                         </Text>
                     </View>
                 </View>
@@ -155,8 +156,7 @@ const styles = StyleSheet.create({
     rowBox: {
         flexDirection: 'row',
         alignItems: 'center',
-        width: 200,
-        marginRight: 120
+        flex: 1
     },
     boxAddProfile: {
         width: '100%',

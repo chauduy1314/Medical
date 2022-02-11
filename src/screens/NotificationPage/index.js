@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, StatusBar } from 'react-native';
 import React from 'react';
+import { t } from 'i18next';
 
 const twobell = require('../../../Resources/Images/twobell.png');
 
@@ -10,7 +11,7 @@ const NotificationPage = () => {
             <View style={styles.boxContent}>
                 <Image source={twobell} />
                 <Text style={styles.boxText}>
-                    Bạn chưa có thông báo nào
+                    {t('noNotification')}
                 </Text>
             </View>
         </SafeAreaView>

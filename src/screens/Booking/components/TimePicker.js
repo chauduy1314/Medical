@@ -1,15 +1,19 @@
-import { StyleSheet, Text, View, Image, TouchableHighlight, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableHighlight, TextInput, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
+import { t } from 'i18next';
 
 const datetime = require('../../../../Resources/Images/datetime.png')
 const sun = require('../../../../Resources/Images/sun.png')
 const night = require('../../../../Resources/Images/night.png')
+const addTime = require('../../../../Resources/Images/addTime.png')
 
 const TimePicker = () => {
     const [date, setDate] = useState(moment(new Date()).format('DD/MM/YYYY'));
     const [show, setShow] = useState(false);
+    const [currentDate, setCurrentDate] = useState(new Date())
+    const [selected, setSelected] = useState('')
 
     const handleConfirm = (selectedDate) => {
         const currentDate = selectedDate || date;
@@ -21,23 +25,34 @@ const TimePicker = () => {
         setShow(false)
     }
 
+    const getCurrentDate = () => {
+        return currentDate.getDate()
+    }
+
+    const getNextDate = () => {
+        return currentDate.getDate() + 1
+    }
+
+    const getNextTwoDate = () => {
+        return currentDate.getDate() + 2
+    }
+
+    const getMonth = () => {
+        return currentDate.getMonth() + 1
+    }
+
     return (
         <View >
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Text style={{ fontFamily: 'SVN-PoppinsSemiBold', fontSize: 14 }}>
-                    Thời gian đến: *
+            <View style={styles.timeTitle}>
+                <Text style={styles.timeTitleText}>
+                    {t('timeComing')}
                 </Text>
-                <TouchableHighlight
-                    onPress={() => setShow(!show)}
-                    underlayColor='#F8F8F8'
-                >
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Image source={datetime} />
-                        <Text style={{ fontSize: 12, fontFamily: 'SVN-Poppins', color: '#68BD45', marginLeft: 5 }}>
-                            {date}
-                        </Text>
-                    </View>
-                </TouchableHighlight>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Image source={datetime} />
+                    <Text style={styles.timeShow}>
+                        {date}
+                    </Text>
+                </View>
                 <DateTimePickerModal
                     isVisible={show}
                     mode="date"
@@ -46,77 +61,74 @@ const TimePicker = () => {
                     display='inline'
                 />
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, paddingHorizontal: 20 }}>
-                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <Text style={styles.day} >
-                        T2
-                    </Text>
-                    <Text style={styles.date}>
-                        12
-                    </Text>
-                </View>
-                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <Text style={styles.day} >
-                        T3
-                    </Text>
-                    <Text style={styles.date}>
-                        13
-                    </Text>
-                </View>
-                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <Text style={styles.day} >
-                        T4
-                    </Text>
-                    <Text style={styles.date}>
-                        14
-                    </Text>
-                </View>
-                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <Text style={styles.day} >
-                        T5
-                    </Text>
-                    <Text style={styles.date}>
-                        15
-                    </Text>
-                </View>
-                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <Text style={styles.day} >
-                        T6
-                    </Text>
-                    <Text style={styles.date}>
-                        16
-                    </Text>
-                </View>
-                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <Text style={styles.day} >
-                        T7
-                    </Text>
-                    <Text style={styles.date}>
-                        17
-                    </Text>
-                </View>
-                <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <Text style={styles.day} >
-                        CN
-                    </Text>
-                    <Text style={styles.date}>
-                        18
-                    </Text>
-                </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
+                <TouchableOpacity onPress={() => { }} style={styles.timePickerBox}>
+                    <View style={styles.timePicker}>
+                        <Text style={styles.timeNumber} >
+                            {`Th${getMonth()}`}
+                        </Text>
+                        <Text style={styles.timeNumber} >
+                            {getCurrentDate()}
+                        </Text>
+                        <Text style={styles.timeText} >
+                            {t('today')}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { }} style={styles.timePickerBox}>
+                    <View style={styles.timePicker}>
+                        <Text style={styles.timeNumber} >
+                            {`Th${getMonth()}`}
+                        </Text>
+                        <Text style={styles.timeNumber} >
+                            {getNextDate()}
+                        </Text>
+                        <Text style={styles.timeText} >
+                            {t('tomorrow')}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => { }} style={styles.timePickerBox}>
+                    <View style={styles.timePicker}>
+                        <Text style={styles.timeNumber} >
+                            {`Th${getMonth()}`}
+                        </Text>
+                        <Text style={styles.timeNumber} >
+                            {getNextTwoDate()}
+                        </Text>
+                        <Text style={styles.timeText} >
+                            {t('nextTwoDay')}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => setShow(!show)}
+                    style={styles.timePickerBox}
+                >
+                    <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around', height: 70 }}>
+                        <View >
+                            <Image source={addTime} />
+                        </View>
+                        <Text style={styles.timeText} >
+                            {t('otherDay')}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
                 <View style={{ width: '48%' }}>
                     <TouchableHighlight
-                        style={{ borderRadius: 8, backgroundColor: '#68BD45', height: 40, justifyContent: 'center' }}
+                        onPress={() => { setSelected('firstBox') }}
+                        style={selected === 'firstBox' ? styles.selectedTimeBox : styles.unselectedTimeBox}
                     >
-                        <View style={{ flexDirection: 'row', paddingVertical: 5, paddingHorizontal: 10 }}>
-                            <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', paddingLeft: 10 }}>
-                                <Image source={sun} />
-                                <Text style={{ fontSize: 13, color: '#FFFFFF', marginLeft: 5, fontFamily: 'SVN-PoppinsSemiBold' }}>
-                                    Buổi sáng
+                        <View style={styles.dayBox}>
+                            <View style={styles.dayBoxColumn}>
+                                <Image source={sun} style={{ marginRight: 10 }} />
+                                <Text style={selected === 'firstBox' ? styles.selectedTimeText : styles.unselectedTimeText}>
+                                    {t('morning')}
                                 </Text>
                             </View>
-                            <Text style={{ fontSize: 13, color: '#FFFFFF' }}>
+                            <Text style={selected === 'firstBox' ? styles.selectedTimeSubText : styles.unselectedTimeSubText}>
                                 07h-12h
                             </Text>
                         </View>
@@ -124,24 +136,22 @@ const TimePicker = () => {
                 </View>
                 <View style={{ width: '48%' }}>
                     <TouchableHighlight
-                        style={{ borderRadius: 8, backgroundColor: '#68BD45', height: 40, justifyContent: 'center' }}
+                        onPress={() => { setSelected('secondBox') }}
+                        style={selected === 'secondBox' ? styles.selectedTimeBox : styles.unselectedTimeBox}
                     >
-                        <View style={{ flexDirection: 'row', paddingVertical: 5, paddingHorizontal: 10 }}>
-                            <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', paddingLeft: 10 }}>
-                                <Image source={sun} />
-                                <Text style={{ fontSize: 13, color: '#FFFFFF', marginLeft: 5, fontFamily: 'SVN-PoppinsSemiBold' }}>
-                                    Buổi sáng
+                        <View style={styles.dayBox}>
+                            <View style={styles.dayBoxColumn}>
+                                <Image source={night} style={{ marginRight: 10 }} />
+                                <Text style={selected === 'secondBox' ? styles.selectedTimeText : styles.unselectedTimeText}>
+                                    {t('afternoon')}
                                 </Text>
                             </View>
-                            <Text style={{ fontSize: 13, color: '#FFFFFF' }}>
-                                07h-12h
+                            <Text style={selected === 'secondBox' ? styles.selectedTimeSubText : styles.unselectedTimeSubText}>
+                                13h-17h
                             </Text>
                         </View>
                     </TouchableHighlight>
                 </View>
-            </View>
-            <View style={{ marginTop: 20 }}>
-                <TextInput style={styles.reason} />
             </View>
         </View>
     );
@@ -161,10 +171,88 @@ const styles = StyleSheet.create({
         color: '#2B2B2B',
         marginTop: 10
     },
-    reason: {
-        height: 90,
-        borderColor: '#FFFFFF',
+    timeNumber: {
+        fontFamily: 'SVN-Poppins',
+        color: '#2B2B2B',
+        fontSize: 16,
+        lineHeight: 20
+    },
+    timeText: {
+        fontFamily: 'SVN-Poppins',
+        fontSize: 11,
+        color: '#AEAEB2'
+    },
+    selectedTimeBox: {
+        backgroundColor: '#68BD45',
+        borderRadius: 8,
+        height: 40,
+        justifyContent: 'center'
+    },
+    unselectedTimeBox: {
         backgroundColor: '#F3F3F3',
-        borderRadius: 14
+        borderRadius: 8,
+        height: 40,
+        justifyContent: 'center'
+    },
+    selectedTimeText: {
+        fontSize: 12,
+        color: '#FFFFFF',
+        fontFamily: 'SVN-PoppinsSemiBold',
+        lineHeight: 17
+    },
+    unselectedTimeText: {
+        color: '#BFC6BD',
+        fontSize: 12,
+        fontFamily: 'SVN-PoppinsSemiBold',
+        lineHeight: 17
+    },
+    selectedTimeSubText: {
+        fontFamily: 'SVN-Poppins',
+        fontSize: 10,
+        color: '#FFFFFF',
+        marginRight: 10
+    },
+    unselectedTimeSubText: {
+        color: '#BFC6BD',
+        fontFamily: 'SVN-Poppins',
+        fontSize: 10,
+        marginRight: 10
+    },
+    timeTitle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    timeTitleText: {
+        fontFamily: 'SVN-PoppinsSemiBold',
+        fontSize: 14
+    },
+    timeShow: {
+        fontSize: 12,
+        fontFamily: 'SVN-Poppins',
+        color: '#68BD45',
+        marginLeft: 5
+    },
+    timePickerBox: {
+        width: '24%',
+        backgroundColor: '#F3F3F3',
+        borderRadius: 12
+    },
+    timePicker: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 70
+    },
+    dayBox: {
+        flexDirection: 'row',
+        paddingHorizontal: 10,
+        alignItems: 'center'
+    },
+    dayBoxColumn: {
+        flexDirection: 'row',
+        flex: 1,
+        alignItems: 'center',
+        paddingLeft: 10
     }
 });

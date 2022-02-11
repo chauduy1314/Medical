@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, SafeAreaView, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, FlatList, ScrollView } from 'react-native';
 import React from 'react';
+import { t } from 'i18next';
 
 const cover = require('../../../Resources/Images/cover.png');
 
@@ -46,30 +47,35 @@ const NotificationPage = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View>
-                <Text style={styles.newTitle}>
-                    Mới
-                </Text>
-                <View style={styles.newBox}>
-                    <Image source={cover} />
-                    <View style={{ marginLeft: 15 }}>
-                        <Text style={styles.notificationTitle}>
-                            Bạn đã đặt lịch khám buổi sáng, 22/2/2022 thành công.
-                        </Text>
-                        <Text style={styles.notificationSubtitle}>
-                            1phút
-                        </Text>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+            >
+                <View>
+                    <Text style={styles.newTitle}>
+                        {t('new')}
+                    </Text>
+                    <View style={styles.newBox}>
+                        <Image source={cover} />
+                        <View style={{ marginLeft: 15 }}>
+                            <Text style={styles.notificationTitle}>
+                                Bạn đã đặt lịch khám buổi sáng, 22/2/2022 thành công.
+                            </Text>
+                            <Text style={styles.notificationSubtitle}>
+                                1phút
+                            </Text>
+                        </View>
                     </View>
+                    <Text style={styles.previousTitle}>
+                        {t('previous')}
+                    </Text>
+                    <FlatList
+                        data={DATA}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                        scrollEnabled={false}
+                    />
                 </View>
-                <Text style={styles.previousTitle}>
-                    Trước đó
-                </Text>
-                <FlatList
-                    data={DATA}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                />
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 };
@@ -80,8 +86,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFFFFF',
         height: '100%',
-        paddingHorizontal: 20,
-        paddingTop: 50
+        paddingHorizontal: 10,
+        paddingTop: 50,
     },
     newTitle: {
         fontFamily: 'SVN-PoppinsBold',
@@ -91,7 +97,7 @@ const styles = StyleSheet.create({
     },
     newBox: {
         flexDirection: 'row',
-        width: 350
+        width: '85%'
     },
     notificationTitle: {
         fontSize: 14,
@@ -112,7 +118,7 @@ const styles = StyleSheet.create({
     },
     notificationBox: {
         flexDirection: 'row',
-        width: 350,
+        width: '85%',
         marginBottom: 20,
         borderBottomWidth: 1.5,
         borderBottomColor: '#F7F7F7',

@@ -1,5 +1,8 @@
-import { StyleSheet, Text, View, SafeAreaView, Image, TouchableHighlight, FlatList, ScrollView, StatusBar } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Image, TouchableHighlight, FlatList, ScrollView, StatusBar, TouchableOpacity, Modal } from 'react-native';
+import React, { useState } from 'react';
+import { useTranslation } from "react-i18next";
+
+import RadioButton from '../../../components/RadioButton';
 
 const avatar = require('../../../Resources/Images/avatarAccount.png');
 const edit = require('../../../Resources/Images/edit.png');
@@ -16,7 +19,10 @@ const feedback = require('../../../Resources/Images/feedback.png');
 const version = require('../../../Resources/Images/version.png');
 const out = require('../../../Resources/Images/out.png');
 
-const Account = () => {
+const Account = ({ navigation }) => {
+    const [modalVisible, setModalVisible] = useState(false)
+    const { t, i18n } = useTranslation();
+    const currentLanguage = i18n.language
 
     const DATA = [
         {
@@ -99,7 +105,7 @@ const Account = () => {
                 </View>
                 <View style={styles.scheduleBoxContainer}>
                     <Text style={styles.scheduleBoxText}>
-                        Lịch khám sắp tới:
+                        {t('upComingAppointment')}
                     </Text>
                     <FlatList
                         data={DATA}
@@ -113,7 +119,7 @@ const Account = () => {
                     <View style={{ paddingTop: 20, paddingLeft: 20 }}>
                         <View >
                             <Text style={styles.settingBoxTitle}>
-                                Cài đặt
+                                {t('setting')}
                             </Text>
                         </View>
                         <View >
@@ -121,30 +127,34 @@ const Account = () => {
                                 <View style={styles.settingBoxColumn}>
                                     <Image source={setting} />
                                     <Text style={styles.settingBoxItemText}>
-                                        Thiết lập tài khoản
+                                        {t('accountSetting')}
                                     </Text>
                                 </View>
                                 <Image source={next} />
                             </View>
-                            <View style={styles.settingBoxRow}>
-                                <View style={styles.settingBoxColumn}>
-                                    <Image source={language} />
-                                    <Text style={styles.settingBoxItemText}>
-                                        Ngôn ngữ
-                                    </Text>
+                            <TouchableOpacity
+                                onPress={() => setModalVisible(true)}
+                            >
+                                <View style={styles.settingBoxRow}>
+                                    <View style={styles.settingBoxColumn}>
+                                        <Image source={language} />
+                                        <Text style={styles.settingBoxItemText}>
+                                            {t('language')}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.settingBoxColumn}>
+                                        <Text style={styles.language}>
+                                            {currentLanguage === 'en' ? 'English' : 'Tiếng Việt'}
+                                        </Text>
+                                        <Image source={next} />
+                                    </View>
                                 </View>
-                                <View style={styles.settingBoxColumn}>
-                                    <Text style={styles.language}>
-                                        Tiếng Việt
-                                    </Text>
-                                    <Image source={next} />
-                                </View>
-                            </View>
+                            </TouchableOpacity>
                             <View style={styles.settingBoxRow}>
                                 <View style={styles.settingBoxColumn}>
                                     <Image source={security} />
                                     <Text style={styles.settingBoxItemText}>
-                                        Chính sách bảo mật
+                                        {t('privacyPolicy')}
                                     </Text>
                                 </View>
                                 <Image source={next} />
@@ -153,7 +163,7 @@ const Account = () => {
                                 <View style={styles.settingBoxColumn}>
                                     <Image source={support} />
                                     <Text style={styles.settingBoxItemText}>
-                                        Trung tâm hỗ trợ
+                                        {t('supportCenter')}
                                     </Text>
                                 </View>
                                 <Image source={next} />
@@ -162,7 +172,7 @@ const Account = () => {
                                 <View style={styles.settingBoxColumn}>
                                     <Image source={permission} />
                                     <Text style={styles.settingBoxItemText}>
-                                        Quyền riêng tư
+                                        {t('privacy')}
                                     </Text>
                                 </View>
                                 <Image source={next} />
@@ -175,7 +185,7 @@ const Account = () => {
                         <View style={styles.settingBoxColumn}>
                             <Image source={application} />
                             <Text style={styles.settingBoxItemText}>
-                                Chia sẻ ứng dụng
+                                {t('shareApp')}
                             </Text>
                         </View>
                         <Image source={next} />
@@ -186,7 +196,7 @@ const Account = () => {
                         <View style={styles.settingBoxColumn}>
                             <Image source={feedback} />
                             <Text style={styles.settingBoxItemText}>
-                                Góp ý ứng dụng
+                                {t('applicationComment')}
                             </Text>
                         </View>
                         <Image source={next} />
@@ -197,7 +207,7 @@ const Account = () => {
                         <View style={styles.settingBoxColumn}>
                             <Image source={version} />
                             <Text style={styles.settingBoxItemText}>
-                                Phiên bản ứng dụng
+                                {t('appVersion')}
                             </Text>
                         </View>
                         <Image source={next} />
@@ -208,12 +218,61 @@ const Account = () => {
                         <View style={styles.settingBoxColumn}>
                             <Image source={out} />
                             <Text style={styles.settingBoxItemText}>
-                                Đăng xuất
+                                {t('logout')}
                             </Text>
                         </View>
                         <Image source={next} />
                     </View>
                 </View>
+                <Modal
+                    visible={modalVisible}
+                    animationType="fade"
+                    transparent
+                >
+                    <View style={styles.modalBackground}>
+                        <View style={styles.modalBox}>
+                            <Text style={styles.modalBoxTitle}>
+                                {t('selectLanguage')}
+                            </Text>
+                            <View style={styles.modalBoxRow}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        i18n.changeLanguage('en')
+                                        setModalVisible(!modalVisible)
+                                    }}
+                                >
+                                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                                        <RadioButton selected={currentLanguage === 'en' ? true : false} />
+                                        <Text style={styles.modalBoxText}>
+                                            English
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        i18n.changeLanguage('vi')
+                                        setModalVisible(!modalVisible)
+                                    }}
+                                >
+                                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                                        <RadioButton selected={currentLanguage === 'vi' ? true : false} />
+                                        <Text style={styles.modalBoxText}>
+                                            Việt Nam
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            <TouchableOpacity
+                                onPress={() => setModalVisible(!modalVisible)}
+                                style={styles.buttonCancel}
+                            >
+                                <Text style={styles.buttonCancelText}>
+                                    Cancel
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </Modal>
             </ScrollView>
         </SafeAreaView>
     );
@@ -350,5 +409,46 @@ const styles = StyleSheet.create({
         fontFamily: 'SVN-Poppins',
         color: '#2B2B2B',
         fontSize: 13
+    },
+    modalBackground: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1
+    },
+    modalBox: {
+        width: '95%',
+        backgroundColor: '#FFFFFF',
+        borderRadius: 10,
+        padding: 15,
+        alignItems: 'center'
+    },
+    modalBoxTitle: {
+        fontFamily: 'SVN-PoppinsSemiBold',
+        fontSize: 24,
+        color: '#2B2B2B',
+        textAlign: 'center'
+    },
+    modalBoxRow: {
+        marginVertical: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '80%'
+    },
+    modalBoxText: {
+        fontFamily: 'SVN-Poppins',
+        fontSize: 16,
+        marginLeft: 5
+    },
+    buttonCancel: {
+        width: '30%',
+        backgroundColor: 'red',
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5
+    },
+    buttonCancelText: {
+        fontFamily: 'SVN-PoppinsSemiBold', fontSize: 14
     }
 });

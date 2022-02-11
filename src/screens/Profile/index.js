@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, SafeAreaView, TouchableHighlight, Image, StatusBar } from 'react-native';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const avatar = require('../../../Resources/Images/face.png');
 const info = require('../../../Resources/Images/info.png');
@@ -8,9 +9,11 @@ const next = require('../../../Resources/Images/next.png');
 const plus = require('../../../Resources/Images/plus.png');
 
 const Profile = ({ navigation }) => {
+    const { t } = useTranslation()
+
     return (
         <SafeAreaView >
-            <StatusBar barStyle='light-content' />
+            <StatusBar barStyle='dark-content' />
             <View style={styles.secondLayer}>
                 <View style={styles.boxInfo}>
                     <View style={styles.boxInfoHeader}>
@@ -22,7 +25,7 @@ const Profile = ({ navigation }) => {
                             onPress={() => { }}
                         >
                             <Text style={styles.boxInfoButtonText}>
-                                Kết nối hồ sơ
+                                {t('profileConnect')}
                             </Text>
                         </TouchableHighlight>
                     </View>
@@ -31,7 +34,7 @@ const Profile = ({ navigation }) => {
                             <View style={styles.rowBox}>
                                 <Image source={info} />
                                 <Text style={styles.boxRowText}>
-                                    Thông tin cá nhân
+                                    {t('personInfo')}
                                 </Text>
                             </View>
                             <Image source={next} />
@@ -40,7 +43,7 @@ const Profile = ({ navigation }) => {
                             <View style={styles.rowBox}>
                                 <Image source={love} />
                                 <Text style={styles.boxRowText}>
-                                    Thông tin sức khoẻ
+                                    {t('healthInfo')}
                                 </Text>
                             </View>
                             <Image source={next} />
@@ -55,7 +58,7 @@ const Profile = ({ navigation }) => {
                         <View style={styles.clickArea}>
                             <Image source={plus} />
                             <Text style={styles.clickAreaText}>
-                                Thêm hồ sơ người thân
+                                {t('addProfilePlaceHolder')}
                             </Text>
                         </View>
                     </View>
@@ -117,7 +120,8 @@ const styles = StyleSheet.create({
     boxInfoButtonText: {
         fontFamily: 'SVN-PoppinsSemiBold',
         fontSize: 12,
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+        lineHeight: 17
     },
     boxInfoBody: {
         flexDirection: 'column',
@@ -141,8 +145,7 @@ const styles = StyleSheet.create({
     rowBox: {
         flexDirection: 'row',
         alignItems: 'center',
-        width: 200,
-        marginRight: 120
+        flex: 1
     },
     boxAddProfile: {
         width: '100%',

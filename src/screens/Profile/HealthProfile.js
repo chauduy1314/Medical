@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, Image, TouchableHighlight, SafeAreaView, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableHighlight, SafeAreaView, StatusBar, ScrollView, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { t } from 'i18next';
 
 const doctor = require('../../../Resources/Images/doctor.png');
 const message = require('../../../Resources/Images/message.png');
@@ -8,70 +9,78 @@ const message = require('../../../Resources/Images/message.png');
 const Tab = createMaterialTopTabNavigator();
 
 
-const HealthProfile = () => {
+const HealthProfileTab = ({ navigation }) => {
     return (
-        <SafeAreaView >
+        <SafeAreaView style={styles.container}>
             <StatusBar barStyle='dark-content' />
-            <View style={styles.container}>
-                <View style={styles.boxProfile}>
-                    <View style={styles.boxProfileTime}>
-                        <Text style={styles.boxProfileDate}>
-                            04
-                        </Text>
-                        <Text style={styles.boxProfileYear}>
-                            01/2022
-                        </Text>
-                    </View>
-                    <View style={styles.boxLine} />
-                    <View style={{ flexDirection: 'column' }}>
-                        <Text style={styles.boxTitle}>
-                            Khám tổng quát
-                        </Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                            <Image source={doctor} />
-                            <Text style={styles.boxSubTitle}>
-                                Bác sĩ: Nguyễn Minh A
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+            >
+                <View >
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('DetailExamination')}
+                    >
+                        <View style={styles.boxProfile}>
+                            <View style={styles.boxProfileTime}>
+                                <Text style={styles.boxProfileDate}>
+                                    04
+                                </Text>
+                                <Text style={styles.boxProfileYear}>
+                                    01/2022
+                                </Text>
+                            </View>
+                            <View style={styles.boxLine} />
+                            <View style={{ flexDirection: 'column' }}>
+                                <Text style={styles.boxTitle}>
+                                    Khám tổng quát
+                                </Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                    <Image source={doctor} />
+                                    <Text style={styles.boxSubTitle}>
+                                        Bác sĩ: Nguyễn Minh A
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    <View style={styles.boxProfile}>
+                        <View style={styles.boxProfileTime}>
+                            <Text style={{ fontSize: 24, fontFamily: 'SVN-PoppinsSemiBold', color: '#39AFFD' }}>
+                                07
                             </Text>
+                            <Text style={{ fontSize: 12, fontFamily: 'SVN-Poppins', color: '#39AFFD' }}>
+                                12/2021
+                            </Text>
+                        </View>
+                        <View style={{ borderRightWidth: 2, borderRightColor: '#39AFFD', height: 80, marginHorizontal: 20 }} />
+                        <View style={{ flexDirection: 'column' }}>
+                            <Text style={styles.boxTitle}>
+                                Khám Răng hàm mặt
+                            </Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                <Image source={doctor} />
+                                <Text style={styles.boxSubTitle}>
+                                    Bác sĩ: Nguyễn Minh B
+                                </Text>
+                            </View>
                         </View>
                     </View>
                 </View>
-                <View style={styles.boxProfile}>
-                    <View style={styles.boxProfileTime}>
-                        <Text style={{ fontSize: 24, fontFamily: 'SVN-PoppinsSemiBold', color: '#39AFFD' }}>
-                            07
-                        </Text>
-                        <Text style={{ fontSize: 12, fontFamily: 'SVN-Poppins', color: '#39AFFD' }}>
-                            12/2021
-                        </Text>
-                    </View>
-                    <View style={{ borderRightWidth: 2, borderRightColor: '#39AFFD', height: 80, marginHorizontal: 20 }} />
-                    <View style={{ flexDirection: 'column' }}>
-                        <Text style={styles.boxTitle}>
-                            Khám Răng hàm mặt
-                        </Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                            <Image source={doctor} />
-                            <Text style={styles.boxSubTitle}>
-                                Bác sĩ: Nguyễn Minh B
-                            </Text>
-                        </View>
-                    </View>
+            </ScrollView>
+            <TouchableHighlight
+                onPress={() => { }}
+                style={styles.messageBox}
+                underlayColor='#F8F8F8'
+            >
+                <View >
+                    <Image source={message} />
                 </View>
-                <TouchableHighlight
-                    onPress={() => { }}
-                    style={styles.messageBox}
-                    underlayColor='#F8F8F8'
-                >
-                    <View >
-                        <Image source={message} />
-                    </View>
-                </TouchableHighlight>
-            </View>
+            </TouchableHighlight>
         </SafeAreaView>
     );
 };
 
-const Test = () => {
+const HealthProfile = () => {
     return (
         <Tab.Navigator
             screenOptions={{
@@ -83,8 +92,8 @@ const Test = () => {
                 }
             }}
         >
-            <Tab.Screen name="Test1" component={HealthProfile} options={{
-                tabBarLabel: 'Ngoại Trú',
+            <Tab.Screen name="OutPatient" component={HealthProfileTab} options={{
+                tabBarLabel: t('outpatient'),
                 tabBarLabelStyle: {
                     textTransform: 'none',
                     fontSize: 16,
@@ -92,8 +101,8 @@ const Test = () => {
                     color: '#BFC6BD'
                 }
             }} />
-            <Tab.Screen name="Tool" component={HealthProfile} options={{
-                tabBarLabel: 'Nội Trú',
+            <Tab.Screen name="InPatient" component={HealthProfileTab} options={{
+                tabBarLabel: t('inpatient'),
                 tabBarLabelStyle: {
                     textTransform: 'none',
                     fontSize: 16,
@@ -105,7 +114,7 @@ const Test = () => {
     )
 }
 
-export default Test;
+export default HealthProfile;
 
 const styles = StyleSheet.create({
     container: {
@@ -159,7 +168,8 @@ const styles = StyleSheet.create({
     },
     messageBox: {
         position: 'absolute',
-        right: 25,
-        top: 500
+        right: '4%',
+        top: '70%',
+        zIndex: 2
     }
 });
