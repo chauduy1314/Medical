@@ -6,9 +6,10 @@ import {
     Text,
     View,
     TouchableOpacity,
-    StatusBar
 } from 'react-native';
 import { useTranslation } from "react-i18next";
+
+import { colors } from '../../styles';
 
 const LandingPage = ({ navigation }) => {
     const { t } = useTranslation()
@@ -27,7 +28,7 @@ const LandingPage = ({ navigation }) => {
                 <TouchableOpacity
                     style={styles.loginButton}
                     onPress={() => navigation.navigate('Login')}
-                    underlayColor='#FFFFFF'
+                    underlayColor={colors.WHITE}
                 >
                     <Text style={styles.textLoginButton}>
                         {t('loginUppercase')}
@@ -36,14 +37,14 @@ const LandingPage = ({ navigation }) => {
                 <TouchableHighlight
                     style={styles.registerButton}
                     onPress={() => navigation.navigate('Register')}
-                    underlayColor='#FFFFFF'
+                    underlayColor={colors.WHITE}
                 >
                     <Text style={styles.textRegisterButton}>
                         {t('registerUppercase')}
                     </Text>
                 </TouchableHighlight>
-            </View>
-        </SafeAreaView>
+            </View >
+        </SafeAreaView >
     );
 };
 
@@ -63,18 +64,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: 55,
         width: 350,
-        backgroundColor: '#184A34',
+        backgroundColor: colors.GREEN_BOLD,
         borderRadius: 16,
         borderColor: '#999100'
     },
     textLoginButton: {
-        color: '#FFFFFF',
+        color: colors.WHITE,
         fontSize: 16,
         fontFamily: 'SVN-PoppinsBold',
         lineHeight: 21
     },
     textRegisterButton: {
-        color: '#68BD45',
+        color: colors.GREEN,
         fontSize: 16,
         fontFamily: 'SVN-PoppinsBold',
         lineHeight: 21
@@ -91,14 +92,14 @@ const styles = StyleSheet.create({
     },
     appTitle: {
         fontSize: 30,
-        color: '#68BD45',
+        color: colors.GREEN,
         textAlign: 'center',
         marginBottom: 20,
         fontFamily: 'SVN-PoppinsBold',
     },
     appSubTitle: {
         fontSize: 14,
-        color: '#BFC6BD',
+        color: colors.GRAY,
         fontFamily: 'SVN-Poppins',
         textAlign: 'center',
         marginBottom: 75,

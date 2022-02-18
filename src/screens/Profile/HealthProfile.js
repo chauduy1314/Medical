@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View, Image, TouchableHighlight, SafeAreaView, StatusBar, ScrollView, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
-const doctor = require('../../../Resources/Images/doctor.png');
-const message = require('../../../Resources/Images/message.png');
+import { colors } from '../../styles';
+import { doctorIcon, messageIcon } from '../../assets'
 
 const Tab = createMaterialTopTabNavigator();
 
-
 const HealthProfileTab = ({ navigation }) => {
+    const { t } = useTranslation()
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle='dark-content' />
@@ -35,7 +35,7 @@ const HealthProfileTab = ({ navigation }) => {
                                     Khám tổng quát
                                 </Text>
                                 <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                                    <Image source={doctor} />
+                                    <Image source={doctorIcon} />
                                     <Text style={styles.boxSubTitle}>
                                         Bác sĩ: Nguyễn Minh A
                                     </Text>
@@ -58,7 +58,7 @@ const HealthProfileTab = ({ navigation }) => {
                                 Khám Răng hàm mặt
                             </Text>
                             <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                                <Image source={doctor} />
+                                <Image source={doctorIcon} />
                                 <Text style={styles.boxSubTitle}>
                                     Bác sĩ: Nguyễn Minh B
                                 </Text>
@@ -73,7 +73,7 @@ const HealthProfileTab = ({ navigation }) => {
                 underlayColor='#F8F8F8'
             >
                 <View >
-                    <Image source={message} />
+                    <Image source={messageIcon} />
                 </View>
             </TouchableHighlight>
         </SafeAreaView>
@@ -81,12 +81,13 @@ const HealthProfileTab = ({ navigation }) => {
 };
 
 const HealthProfile = () => {
+    const { t } = useTranslation()
     return (
         <Tab.Navigator
             screenOptions={{
                 tabBarIndicatorStyle: {
-                    backgroundColor: '#184A34',
-                    height: 5,
+                    backgroundColor: colors.GREEN_BOLD,
+                    height: 3,
                     marginHorizontal: 20,
                     width: '40%'
                 }
@@ -98,7 +99,7 @@ const HealthProfile = () => {
                     textTransform: 'none',
                     fontSize: 16,
                     fontFamily: 'SVN-PoppinsSemiBold',
-                    color: '#BFC6BD'
+                    color: colors.GRAY
                 }
             }} />
             <Tab.Screen name="InPatient" component={HealthProfileTab} options={{
@@ -107,7 +108,7 @@ const HealthProfile = () => {
                     textTransform: 'none',
                     fontSize: 16,
                     fontFamily: 'SVN-PoppinsSemiBold',
-                    color: '#BFC6BD'
+                    color: colors.GRAY
                 }
             }} />
         </Tab.Navigator>
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         flexDirection: 'row',
         height: 100,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: colors.WHITE,
         alignItems: 'center',
         paddingHorizontal: 20
     },
@@ -155,12 +156,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 20
     },
     boxTitle: {
-        color: '#2B2B2B',
+        color: colors.BLACK,
         fontFamily: 'SVN-Poppins',
         fontSize: 16
     },
     boxSubTitle: {
-        color: '#BFC6BD',
+        color: colors.GRAY,
         fontSize: 12,
         fontFamily: 'SVN-Poppins',
         marginLeft: 5,

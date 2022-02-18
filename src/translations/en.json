@@ -44,7 +44,7 @@
     "inpatient": "Inpatient",
     "bookingHeader": "Appointment",
     "choosePatient": "Select the customer you want to examine:",
-    "add": "add",
+    "add": "Add",
     "infoBooker": "Scheduler information:",
     "name": "Name",
     "birthDay": "Birthday",
@@ -73,5 +73,6 @@
     "applicationComment": "Application Comment",
     "appVersion": "App Version",
     "logout": "Log Out",
-    "selectLanguage": "Select your language"
+    "selectLanguage": "Select your language",
+    "meetingDate": "Meeting Day"
 }

@@ -2,22 +2,9 @@ import { StyleSheet, Text, View, SafeAreaView, Image, TouchableHighlight, FlatLi
 import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
 
-import RadioButton from '../../../components/RadioButton';
-
-const avatar = require('../../../Resources/Images/avatarAccount.png');
-const edit = require('../../../Resources/Images/edit.png');
-const logOut = require('../../../Resources/Images/logOut.png');
-const moreInfo = require('../../../Resources/Images/moreInfo.png');
-const setting = require('../../../Resources/Images/setting.png');
-const next = require('../../../Resources/Images/next.png');
-const language = require('../../../Resources/Images/language.png');
-const security = require('../../../Resources/Images/security.png');
-const support = require('../../../Resources/Images/support.png');
-const permission = require('../../../Resources/Images/private.png');
-const application = require('../../../Resources/Images/application.png');
-const feedback = require('../../../Resources/Images/feedback.png');
-const version = require('../../../Resources/Images/version.png');
-const out = require('../../../Resources/Images/out.png');
+import { colors } from '../../styles';
+import RadioButton from '../../components/RadioButton';
+import { avatarAccount, editIcon, logOutIcon, moreInfoIcon, settingIcon, languageIcon, securityIcon, supportIcon, privateIcon, applicationIcon, feedbackIcon, versionIcon, outIcon, nextIcon } from '../../assets'
 
 const Account = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false)
@@ -45,7 +32,7 @@ const Account = ({ navigation }) => {
     const Item = (props) => (
         <View style={styles.scheduleBoxContent}>
             <View style={styles.scheduleBoxRow}>
-                <View style={{ borderLeftWidth: 2, borderColor: '#68BD45', height: 40 }} />
+                <View style={{ borderLeftWidth: 2, borderColor: colors.GREEN, height: 40 }} />
                 <View style={styles.scheduleBoxColumn}>
                     <Text style={styles.scheduleBoxTitle}>
                         {props.title}
@@ -55,7 +42,7 @@ const Account = ({ navigation }) => {
                     </Text>
                 </View>
                 <View >
-                    <Image source={moreInfo} />
+                    <Image source={moreInfoIcon} />
                 </View>
             </View>
         </View>
@@ -74,14 +61,14 @@ const Account = ({ navigation }) => {
                 <View style={styles.headerBox}>
                     <View >
                         <TouchableHighlight
-                            onPress={() => { }}
+                            onPress={() => { navigation.navigate('Login') }}
                             underlayColor='#F8F8F8'
                         >
-                            <Image source={logOut} />
+                            <Image source={logOutIcon} />
                         </TouchableHighlight>
                     </View>
                     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                        <Image source={avatar} />
+                        <Image source={avatarAccount} />
                         <Text style={styles.headerBoxText}>
                             Nguyễn Đặng Hoài Trang
                         </Text>
@@ -99,7 +86,7 @@ const Account = ({ navigation }) => {
                             onPress={() => { }}
                             underlayColor='#F8F8F8'
                         >
-                            <Image source={edit} />
+                            <Image source={editIcon} />
                         </TouchableHighlight>
                     </View>
                 </View>
@@ -125,19 +112,19 @@ const Account = ({ navigation }) => {
                         <View >
                             <View style={styles.settingBoxFirstItem}>
                                 <View style={styles.settingBoxColumn}>
-                                    <Image source={setting} />
+                                    <Image source={settingIcon} />
                                     <Text style={styles.settingBoxItemText}>
                                         {t('accountSetting')}
                                     </Text>
                                 </View>
-                                <Image source={next} />
+                                <Image source={nextIcon} />
                             </View>
                             <TouchableOpacity
                                 onPress={() => setModalVisible(true)}
                             >
                                 <View style={styles.settingBoxRow}>
                                     <View style={styles.settingBoxColumn}>
-                                        <Image source={language} />
+                                        <Image source={languageIcon} />
                                         <Text style={styles.settingBoxItemText}>
                                             {t('language')}
                                         </Text>
@@ -146,36 +133,36 @@ const Account = ({ navigation }) => {
                                         <Text style={styles.language}>
                                             {currentLanguage === 'en' ? 'English' : 'Tiếng Việt'}
                                         </Text>
-                                        <Image source={next} />
+                                        <Image source={nextIcon} />
                                     </View>
                                 </View>
                             </TouchableOpacity>
                             <View style={styles.settingBoxRow}>
                                 <View style={styles.settingBoxColumn}>
-                                    <Image source={security} />
+                                    <Image source={securityIcon} />
                                     <Text style={styles.settingBoxItemText}>
                                         {t('privacyPolicy')}
                                     </Text>
                                 </View>
-                                <Image source={next} />
+                                <Image source={nextIcon} />
                             </View>
                             <View style={styles.settingBoxRow}>
                                 <View style={styles.settingBoxColumn}>
-                                    <Image source={support} />
+                                    <Image source={supportIcon} />
                                     <Text style={styles.settingBoxItemText}>
                                         {t('supportCenter')}
                                     </Text>
                                 </View>
-                                <Image source={next} />
+                                <Image source={nextIcon} />
                             </View>
                             <View style={styles.settingBoxLastItem}>
                                 <View style={styles.settingBoxColumn}>
-                                    <Image source={permission} />
+                                    <Image source={privateIcon} />
                                     <Text style={styles.settingBoxItemText}>
                                         {t('privacy')}
                                     </Text>
                                 </View>
-                                <Image source={next} />
+                                <Image source={nextIcon} />
                             </View>
                         </View>
                     </View>
@@ -183,47 +170,51 @@ const Account = ({ navigation }) => {
                 <View style={styles.boxContainer}>
                     <View style={styles.boxRow}>
                         <View style={styles.settingBoxColumn}>
-                            <Image source={application} />
+                            <Image source={applicationIcon} />
                             <Text style={styles.settingBoxItemText}>
                                 {t('shareApp')}
                             </Text>
                         </View>
-                        <Image source={next} />
+                        <Image source={nextIcon} />
                     </View>
                 </View>
                 <View style={styles.boxContainer}>
                     <View style={styles.boxRow}>
                         <View style={styles.settingBoxColumn}>
-                            <Image source={feedback} />
+                            <Image source={feedbackIcon} />
                             <Text style={styles.settingBoxItemText}>
                                 {t('applicationComment')}
                             </Text>
                         </View>
-                        <Image source={next} />
+                        <Image source={nextIcon} />
                     </View>
                 </View>
                 <View style={styles.boxContainer}>
                     <View style={styles.boxRow}>
                         <View style={styles.settingBoxColumn}>
-                            <Image source={version} />
+                            <Image source={versionIcon} />
                             <Text style={styles.settingBoxItemText}>
                                 {t('appVersion')}
                             </Text>
                         </View>
-                        <Image source={next} />
+                        <Image source={nextIcon} />
                     </View>
                 </View>
-                <View style={styles.boxContainer}>
-                    <View style={styles.boxRow}>
-                        <View style={styles.settingBoxColumn}>
-                            <Image source={out} />
-                            <Text style={styles.settingBoxItemText}>
-                                {t('logout')}
-                            </Text>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Login')}
+                >
+                    <View style={styles.boxContainer}>
+                        <View style={styles.boxRow}>
+                            <View style={styles.settingBoxColumn}>
+                                <Image source={outIcon} />
+                                <Text style={styles.settingBoxItemText}>
+                                    {t('logout')}
+                                </Text>
+                            </View>
+                            <Image source={nextIcon} />
                         </View>
-                        <Image source={next} />
                     </View>
-                </View>
+                </TouchableOpacity>
                 <Modal
                     visible={modalVisible}
                     animationType="fade"
@@ -299,11 +290,11 @@ const styles = StyleSheet.create({
     headerBoxID: {
         fontSize: 14,
         fontFamily: 'SVN-Poppins',
-        color: '#68BD45'
+        color: colors.GREEN
     },
     scheduleBoxContainer: {
         width: '100%',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: colors.WHITE,
         marginTop: 20,
         paddingVertical: 20,
         paddingLeft: 20,
@@ -311,17 +302,17 @@ const styles = StyleSheet.create({
     scheduleBoxText: {
         fontFamily: 'SVN-PoppinsSemiBold',
         fontSize: 16,
-        color: '#2B2B2B'
+        color: colors.BLACK
     },
     settingBox: {
         width: '100%',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: colors.WHITE,
         marginTop: 10
     },
     settingBoxTitle: {
         fontFamily: 'SVN-PoppinsSemiBold',
         fontSize: 16,
-        color: '#2B2B2B',
+        color: colors.BLACK,
         marginBottom: 15
     },
     settingBoxFirstItem: {
@@ -366,11 +357,11 @@ const styles = StyleSheet.create({
     language: {
         fontFamily: 'SVN-Poppins',
         fontSize: 13,
-        color: '#BFC6BD'
+        color: colors.GRAY
     },
     boxContainer: {
         width: '100%',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: colors.WHITE,
         marginTop: 10,
         paddingLeft: 20,
         paddingVertical: 10
@@ -402,12 +393,12 @@ const styles = StyleSheet.create({
     },
     scheduleBoxTitle: {
         fontFamily: 'SVN-Poppins',
-        color: '#68BD45',
+        color: colors.GREEN,
         fontSize: 16
     },
     scheduleBoxSubtitle: {
         fontFamily: 'SVN-Poppins',
-        color: '#2B2B2B',
+        color: colors.BLACK,
         fontSize: 13
     },
     modalBackground: {
@@ -418,7 +409,7 @@ const styles = StyleSheet.create({
     },
     modalBox: {
         width: '95%',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: colors.WHITE,
         borderRadius: 10,
         padding: 15,
         alignItems: 'center'
@@ -426,7 +417,7 @@ const styles = StyleSheet.create({
     modalBoxTitle: {
         fontFamily: 'SVN-PoppinsSemiBold',
         fontSize: 24,
-        color: '#2B2B2B',
+        color: colors.BLACK,
         textAlign: 'center'
     },
     modalBoxRow: {

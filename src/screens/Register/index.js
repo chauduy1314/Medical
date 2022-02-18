@@ -10,19 +10,22 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-const hideIcon = require('../../../Resources/Images/hide.png');
-const lockIcon = require('../../../Resources/Images/lock.png');
-const userIcon = require('../../../Resources/Images/user.png');
-
+import { colors } from '../../styles';
+import { hideIcon, userIcon, lockIcon } from '../../assets';
 
 const Register = ({ navigation }) => {
     const { t } = useTranslation()
 
     return (
         <SafeAreaView style={styles.container}>
-            <View >
-                <View style={{ height: '95%' }}>
+            <KeyboardAwareScrollView
+                showsVerticalScrollIndicator={false}
+                style={{ flex: 1 }}
+                contentContainerStyle={{ flex: 1, paddingBottom: 16, paddingTop: '15%' }}
+            >
+                <View style={{ flex: 1 }}>
                     <Text style={styles.loginTitle}>
                         {t('register')}
                     </Text>
@@ -30,13 +33,15 @@ const Register = ({ navigation }) => {
                         <View >
                             <Image source={userIcon} style={styles.userIcon} />
                         </View>
-                        <TextInput
-                            placeholder={t('userAccountPlaceHolder')}
-                            style={styles.emailInputVal}
-                        />
+                        <View>
+                            <TextInput
+                                placeholder={t('userAccountPlaceHolder')}
+                                style={styles.emailInputVal}
+                            />
+                        </View>
                     </View>
-                    <View style={styles.passwordInput}>
-                        <View style={{ flexDirection: 'row', flex: 1 }}>
+                    <View style={[styles.passwordInput, styles.margin]}>
+                        <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
                             <Image source={lockIcon} style={styles.lockIcon} />
                             <TextInput
                                 placeholder={t('userPasswordPlaceHolder')}
@@ -45,13 +50,13 @@ const Register = ({ navigation }) => {
                         </View>
                         <TouchableHighlight
                             onPress={() => { }}
-                            underlayColor='#FFFFFF'
+                            underlayColor={colors.WHITE}
                         >
                             <Image source={hideIcon} style={{ marginRight: 5 }} />
                         </TouchableHighlight>
                     </View>
                     <View style={styles.passwordInput}>
-                        <View style={{ flexDirection: 'row', flex: 1 }}>
+                        <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
                             <Image source={lockIcon} style={styles.lockIcon} />
                             <TextInput
                                 placeholder={t('retypePassword')}
@@ -60,7 +65,7 @@ const Register = ({ navigation }) => {
                         </View>
                         <TouchableHighlight
                             onPress={() => { }}
-                            underlayColor='#FFFFFF'
+                            underlayColor={colors.WHITE}
                         >
                             <Image source={hideIcon} style={{ marginRight: 5 }} />
                         </TouchableHighlight>
@@ -69,14 +74,14 @@ const Register = ({ navigation }) => {
                         <TouchableOpacity
                             style={styles.loginButton}
                             onPress={() => { }}
-                            underlayColor='#FFFFFF'
+                            underlayColor={colors.WHITE}
                         >
                             <Text style={styles.textLoginButton}>
-                                {t('registerUpperCase')}
+                                {t('registerUppercase')}
                             </Text>
                         </TouchableOpacity>
                     </View>
-                </View>
+                </View >
                 <View style={styles.registerBox}>
                     <View >
                         <Text style={styles.registerText}>
@@ -85,7 +90,7 @@ const Register = ({ navigation }) => {
                     </View>
                     <View >
                         <TouchableHighlight
-                            underlayColor='#FFFFFF'
+                            underlayColor={colors.WHITE}
                             onPress={() => navigation.navigate('Login')}
                         >
                             <Text style={styles.registerTextPress}>
@@ -93,21 +98,21 @@ const Register = ({ navigation }) => {
                             </Text>
                         </TouchableHighlight>
                     </View>
-                </View>
-            </View>
-        </SafeAreaView>
+                </View >
+            </KeyboardAwareScrollView >
+        </SafeAreaView >
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: '20%',
-        marginHorizontal: 30
+        marginHorizontal: 36,
+        flex: 1
     },
     loginTitle: {
         fontFamily: 'SVN-PoppinsBold',
         fontSize: 30,
-        color: '#68BD45',
+        color: colors.GREEN,
         marginBottom: 50,
         lineHeight: 35
     },
@@ -116,14 +121,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         height: 55,
-        width: 350,
-        backgroundColor: '#184A34',
+        width: '100%',
+        backgroundColor: colors.GREEN_BOLD,
         borderRadius: 16,
         borderColor: '#999100',
         marginTop: 10
     },
     textLoginButton: {
-        color: '#FFFFFF',
+        color: colors.WHITE,
         fontSize: 16,
         fontFamily: 'SVN-PoppinsBold',
         lineHeight: 21
@@ -131,13 +136,14 @@ const styles = StyleSheet.create({
     emailInputVal: {
         fontSize: 14,
         fontFamily: 'SVN-Poppins',
-        width: '100%',
-        height: 25,
-        lineHeight: 20
+        height: 30,
+        lineHeight: 19,
+        width: 250,
+        paddingBottom: 5
     },
     userIcon: {
-        width: 20,
-        height: 25,
+        width: 24,
+        height: 24,
         marginRight: 14
     },
     emailInput: {
@@ -145,26 +151,29 @@ const styles = StyleSheet.create({
         borderBottomColor: '#E3E8F1',
         borderBottomWidth: 1,
         paddingBottom: 10,
-        marginBottom: 30
+        marginBottom: 30,
+        alignItems: 'center',
     },
     passwordInput: {
         flexDirection: 'row',
         borderBottomColor: '#E3E8F1',
         borderBottomWidth: 1,
         paddingBottom: 10,
-        marginBottom: 30
+        marginBottom: 15,
+        alignItems: 'center'
     },
     lockIcon: {
-        width: 20,
-        height: 25,
+        width: 24,
+        height: 24,
         marginRight: 14
     },
     passwordInputVal: {
         fontSize: 14,
         fontFamily: 'SVN-Poppins',
-        width: '100%',
-        height: 25,
-        lineHeight: 20
+        height: 30,
+        lineHeight: 19,
+        width: 240,
+        paddingBottom: 5
     },
     forgotPasswordText: {
         textAlign: 'right',
@@ -180,16 +189,19 @@ const styles = StyleSheet.create({
     },
     registerTextPress: {
         fontSize: 14,
-        color: '#68BD45',
+        color: colors.GREEN,
         fontFamily: 'SVN-PoppinsBold',
         marginLeft: 3,
         lineHeight: 20
     },
     registerText: {
-        color: '#68BD45',
+        color: colors.GREEN,
         fontFamily: 'SVN-Poppins',
         fontSize: 14,
         lineHeight: 20
+    },
+    margin: {
+        marginBottom: 30
     }
 });
 

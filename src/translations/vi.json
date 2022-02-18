@@ -73,5 +73,6 @@
     "applicationComment": "Góp ý ứng dụng",
     "appVersion": "Phiên bản ứng dụng",
     "logout": "Đăng xuất",
-    "selectLanguage": "Chọn ngôn ngữ"
+    "selectLanguage": "Chọn ngôn ngữ",
+    "meetingDate": "Ngày khám"
 }

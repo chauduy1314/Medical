@@ -1,20 +1,21 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 
-const time = require('../../../../Resources/Images/time.png')
+import { colors } from '../../../styles';
+import { timeIcon } from '../../../assets'
 
 const New = (props) => {
     return (
-        <View >
+        <View style={{ width: 150 }}>
             <Image source={props.image} />
-            <View style={{ width: 150, color: '#2B2B2B', fontFamily: 'SVN-Poppins', fontSize: 14, lineHeight: 20, marginVertical: 10 }}>
-                <Text >
+            <View style={{ width: 120, marginVertical: 5 }}>
+                <Text style={styles.newsTitle}>
                     {props.title}
                 </Text>
             </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image source={time} style={{ marginRight: 5 }} />
-                <Text style={{ fontFamily: 'SVN-Poppins', fontSize: 12, color: '#68BD45' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', lineHeight: 15 }}>
+                <Image source={timeIcon} style={{ marginRight: 5 }} />
+                <Text style={styles.newsTime}>
                     {props.time}
                 </Text>
             </View>
@@ -24,4 +25,19 @@ const New = (props) => {
 
 export default New
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    newsTitle: {
+        color: colors.BLACK,
+        fontFamily: 'SVN-Poppins',
+        fontSize: 14,
+        lineHeight: 20,
+        textAlign: 'left'
+    },
+    newsTime: {
+        fontFamily: 'SVN-Poppins',
+        fontSize: 10,
+        color: colors.GREEN,
+        lineHeight: 15,
+        paddingTop: 2
+    }
+})

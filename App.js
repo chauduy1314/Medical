@@ -17,18 +17,8 @@ import NotificationPage from './src/screens/NotificationPage'
 import Account from './src/screens/Account'
 import HasNotification from './src/screens/NotificationPage/HasNotification'
 import DetailExamination from './src/screens/Profile/DetailExamination';
-
-const home = require('./Resources/Images/home.png');
-const profile = require('./Resources/Images/profile.png');
-const booking = require('./Resources/Images/booking.png');
-const bell = require('./Resources/Images/bell.png');
-const account = require('./Resources/Images/account.png');
-const homeActive = require('./Resources/Images/homeActive.png');
-const profileActive = require('./Resources/Images/profileActive.png');
-const bellActive = require('./Resources/Images/bellActive.png');
-const accountActive = require('./Resources/Images/accountActive.png');
-const doublecheck = require('./Resources/Images/doublecheck.png');
-const cancel = require('./Resources/Images/cancel.png');
+import { colors } from './src/styles';
+import { homeIcon, profileIcon, bookingIcon, bellIcon, accountIcon, homeActiveIcon, profileActiveIcon, bellActiveIcon, accountActiveIcon, doubleCheckIcon, cancelIcon } from './src/assets'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -37,7 +27,7 @@ const MyTheme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        background: '#FFFFFF',
+        background: colors.WHITE,
     },
 };
 
@@ -53,12 +43,17 @@ const MainTab = () => {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <Image source={focused ? homeActive : home} />
+                        <Image source={focused ? homeActiveIcon : homeIcon} />
                     ),
-                    tabBarActiveTintColor: '#68BD45',
+                    tabBarActiveTintColor: colors.GREEN,
                     tabBarLabel: t('home'),
                     tabBarLabelStyle: {
                         fontFamily: 'SVN-Poppins'
+                    },
+                    tabBarStyle: {
+                        height: 60,
+                        paddingBottom: 10,
+                        marginBottom: 10
                     }
                 }}
             />
@@ -68,12 +63,17 @@ const MainTab = () => {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <Image source={focused ? profileActive : profile} />
+                        <Image source={focused ? profileActiveIcon : profileIcon} />
                     ),
-                    tabBarActiveTintColor: '#68BD45',
+                    tabBarActiveTintColor: colors.GREEN,
                     tabBarLabel: t('profile'),
                     tabBarLabelStyle: {
                         fontFamily: 'SVN-Poppins'
+                    },
+                    tabBarStyle: {
+                        height: 60,
+                        paddingBottom: 10,
+                        marginBottom: 10
                     }
                 }}
             />
@@ -82,9 +82,9 @@ const MainTab = () => {
                 component={Booking}
                 options={{
                     tabBarIcon: () => (
-                        <Image source={booking} style={{ marginBottom: 30 }} />
+                        <Image source={bookingIcon} style={{ marginBottom: 30 }} />
                     ),
-                    tabBarActiveTintColor: '#68BD45',
+                    tabBarActiveTintColor: colors.GREEN,
                     tabBarLabel: t('booking'),
                     tabBarLabelStyle: {
                         fontFamily: 'SVN-Poppins'
@@ -92,40 +92,45 @@ const MainTab = () => {
                     headerTitle: t('bookingHeader'),
                     headerTitleStyle: {
                         fontFamily: 'SVN-PoppinsSemiBold',
-                        color: '#2B2B2B',
+                        color: colors.BLACK,
                         fontSize: 18
                     },
                     headerShadowVisible: false,
                     headerLeft: () => (
                         <TouchableOpacity
                             onPress={() => { }}
-                            underlayColor='#FFFFFF'
+                            underlayColor={colors.WHITE}
                             style={{ justifyContent: 'center' }}
                         >
-                            <Image source={cancel} style={{ marginLeft: 10 }} />
+                            <Image source={cancelIcon} style={{ marginLeft: 10 }} />
                         </TouchableOpacity>
                     ),
                     headerRight: () => (
                         <TouchableOpacity
                             onPress={() => { }}
-                            underlayColor='#FFFFFF'
-                            style={{ width: 80, height: 30, backgroundColor: '#68BD45', borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginRight: 10 }}
+                            underlayColor={colors.WHITE}
+                            style={{ width: 80, height: 30, backgroundColor: colors.GREEN, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginRight: 10 }}
                         >
-                            <Text style={{ fontFamily: 'SVN-Poppins', color: '#FFFFFF', fontSize: 14 }}>
+                            <Text style={{ fontFamily: 'SVN-Poppins', color: colors.WHITE, fontSize: 14 }}>
                                 {t('booking')}
                             </Text>
                         </TouchableOpacity>
-                    )
+                    ),
+                    tabBarStyle: {
+                        height: 60,
+                        paddingBottom: 10,
+                        marginBottom: 10
+                    }
                 }}
             />
-            <Tab.Screen
+            < Tab.Screen
                 name="Notification"
-                component={NotificationPage}
+                component={HasNotification}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <Image source={focused ? bellActive : bell} />
+                        <Image source={focused ? bellActiveIcon : bellIcon} />
                     ),
-                    tabBarActiveTintColor: '#68BD45',
+                    tabBarActiveTintColor: colors.GREEN,
                     tabBarLabel: t('notification'),
                     tabBarLabelStyle: {
                         fontFamily: 'SVN-Poppins'
@@ -133,36 +138,46 @@ const MainTab = () => {
                     headerTitle: t('notification'),
                     headerTitleStyle: {
                         fontFamily: 'SVN-PoppinsSemiBold',
-                        color: '#2B2B2B',
+                        color: colors.BLACK,
                         fontSize: 18
                     },
                     headerShadowVisible: false,
                     headerRight: () => (
                         <TouchableHighlight
                             onPress={() => { }}
-                            underlayColor='#FFFFFF'
+                            underlayColor={colors.WHITE}
                         >
-                            <Image source={doublecheck} style={{ marginRight: 20 }} />
+                            <Image source={doubleCheckIcon} style={{ marginRight: 20 }} />
                         </TouchableHighlight>
-                    )
+                    ),
+                    tabBarStyle: {
+                        height: 60,
+                        paddingBottom: 10,
+                        marginBottom: 10
+                    }
                 }}
             />
-            <Tab.Screen
+            < Tab.Screen
                 name="Account"
                 component={Account}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <Image source={focused ? accountActive : account} />
+                        <Image source={focused ? accountActiveIcon : accountIcon} />
                     ),
-                    tabBarActiveTintColor: '#68BD45',
+                    tabBarActiveTintColor: colors.GREEN,
                     tabBarLabel: t('account'),
                     tabBarLabelStyle: {
                         fontFamily: 'SVN-Poppins'
                     },
+                    tabBarStyle: {
+                        height: 60,
+                        paddingBottom: 10,
+                        marginBottom: 10,
+                    }
                 }}
             />
-        </Tab.Navigator>
+        </Tab.Navigator >
     )
 }
 
@@ -173,29 +188,29 @@ const App = () => {
         <NavigationContainer theme={MyTheme} >
             <Stack.Navigator>
                 <Stack.Screen name="Landing" component={LandingPage} options={{ headerShown: false }} />
-                <Stack.Screen name="Login" component={Login} options={{ headerBackTitle: '', headerTitle: '', headerTintColor: '#BFC6BD', headerShadowVisible: false }} />
-                <Stack.Screen name="Register" component={Register} options={{ headerBackTitle: '', headerTitle: '', headerTintColor: '#BFC6BD', headerShadowVisible: false }} />
+                <Stack.Screen name="Login" component={Login} options={{ headerBackTitle: '', headerTitle: '', headerTintColor: colors.GRAY, headerShadowVisible: false }} />
+                <Stack.Screen name="Register" component={Register} options={{ headerBackTitle: '', headerTitle: '', headerTintColor: colors.GRAY, headerShadowVisible: false }} />
                 <Stack.Screen name="MainTab" component={MainTab} options={{ headerShown: false }} />
                 <Stack.Screen name="HealthProfile" component={HealthProfile} options={{
                     headerTitle: t('healthRecord'),
                     headerBackTitle: '',
-                    headerTintColor: '#BFC6BD',
+                    headerTintColor: colors.GRAY,
                     headerShadowVisible: false,
                     headerTitleStyle: {
                         fontSize: 18,
                         fontFamily: 'SVN-PoppinsBold',
-                        color: '#2B2B2B'
+                        color: colors.BLACK
                     }
                 }} />
                 <Stack.Screen name="DetailExamination" component={DetailExamination} options={{
                     headerTitle: 'Thông Tin Khám',
                     headerBackTitle: '',
-                    headerTintColor: '#BFC6BD',
+                    headerTintColor: colors.GRAY,
                     headerShadowVisible: false,
                     headerTitleStyle: {
                         fontSize: 18,
                         fontFamily: 'SVN-PoppinsBold',
-                        color: '#2B2B2B'
+                        color: colors.BLACK
                     }
                 }} />
             </Stack.Navigator>

@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView } from 'react-native';
 import React from 'react';
 
-const bookmark = require('../../../Resources/Images/bookmark.png')
-const next = require('../../../Resources/Images/next.png')
-const newSpaper = require('../../../Resources/Images/newSpaper.png')
+import { colors } from '../../styles';
+import { bookmarkIcon, nextIcon, newSpaperIcon } from '../../assets'
 
 const DetailExamination = () => {
     return (
@@ -63,7 +62,7 @@ const DetailExamination = () => {
                 </View>
                 <View style={styles.categoryBox}>
                     <View style={styles.categoryBoxTitle}>
-                        <Image source={bookmark} />
+                        <Image source={bookmarkIcon} />
                         <Text style={styles.categoryBoxText}>
                             Bạn Đã Khám
                         </Text>
@@ -72,48 +71,48 @@ const DetailExamination = () => {
                         <Text style={styles.categoryBoxLabel}>
                             1. Vital Signs
                         </Text>
-                        <Image source={next} />
+                        <Image source={nextIcon} />
                     </View>
                     <View style={styles.categoryBoxRow}>
                         <Text style={styles.categoryBoxLabel}>
                             2. Khám tim mạch
                         </Text>
-                        <Image source={next} />
+                        <Image source={nextIcon} />
                     </View>
                     <View style={styles.categoryBoxRow}>
                         <Text style={styles.categoryBoxLabel}>
                             3. Lab Test
                         </Text>
-                        <Image source={next} />
+                        <Image source={nextIcon} />
                     </View>
                     <View style={styles.categoryBoxRow}>
                         <Text style={styles.categoryBoxLabel}>
                             4. Ear Test
                         </Text>
-                        <Image source={next} />
+                        <Image source={nextIcon} />
                     </View>
                     <View style={styles.categoryBoxRow}>
                         <Text style={styles.categoryBoxLabel}>
                             5. Far Vison
                         </Text>
-                        <Image source={next} />
+                        <Image source={nextIcon} />
                     </View>
                     <View style={styles.categoryBoxRow}>
                         <Text style={styles.categoryBoxLabel}>
                             6. Color Blind
                         </Text>
-                        <Image source={next} />
+                        <Image source={nextIcon} />
                     </View>
                     <View style={styles.categoryBoxRow}>
                         <Text style={styles.categoryBoxLabel}>
                             7. Refractive Error
                         </Text>
-                        <Image source={next} />
+                        <Image source={nextIcon} />
                     </View>
                 </View>
                 <View style={styles.serviceBox}>
                     <View style={styles.serviceBoxTitle}>
-                        <Image source={newSpaper} />
+                        <Image source={newSpaperIcon} />
                         <Text style={styles.serviceBoxText}>
                             Chỉ Định Dịch Vụ
                         </Text>
@@ -123,7 +122,7 @@ const DetailExamination = () => {
                             1. Thuốc
                         </Text>
                         <Text style={styles.serviceBoxValue}>
-                            {`Abc 5mg ( UCB thuỵ sĩ)\nnĐơn giá: 56,000đ`}
+                            Abc 5mg ( UCB thuỵ sĩ) Đơn giá: 56,000đ
                         </Text>
                     </View>
                     <View >
@@ -131,7 +130,7 @@ const DetailExamination = () => {
                             2. Xét nghiệm
                         </Text>
                         <Text style={styles.serviceBoxValue}>
-                            {`Dengue Virus NS1 \nnĐơn giá: 56,000đ`}
+                            Dengue Virus NS1 Đơn giá: 56,000đ
                         </Text>
                     </View>
                 </View>
@@ -148,7 +147,7 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     infoCustomerBox: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: colors.WHITE,
         marginVertical: 10,
         padding: 10
     },
@@ -159,22 +158,24 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1.5,
         paddingBottom: 10,
         marginTop: 10,
+        alignItems: 'flex-start'
     },
     infoBoxLabel: {
         fontSize: 12,
         fontFamily: 'SVN-Poppins',
-        color: '#AEAEB2'
+        color: colors.GRAY_BOLD,
+        lineHeight: 22
     },
     infoBoxValue: {
         fontFamily: 'SVN-Poppins',
         fontSize: 14,
-        color: '#2B2B2B',
+        color: colors.BLACK,
         textAlign: 'right',
         width: '45%',
-        lineHeight: 22
+        lineHeight: 22,
     },
     categoryBox: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: colors.WHITE,
         padding: 10,
         paddingBottom: 20
     },
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
     },
     categoryBoxText: {
         fontFamily: 'SVN-PoppinsSemiBold',
-        color: '#2B2B2B',
+        color: colors.BLACK,
         marginLeft: 5
     },
     categoryBoxRow: {
@@ -200,10 +201,10 @@ const styles = StyleSheet.create({
         flex: 1,
         fontFamily: 'SVN-Poppins',
         fontSize: 14,
-        color: '#2B2B2B'
+        color: colors.BLACK
     },
     serviceBox: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: colors.WHITE,
         marginVertical: 10,
         padding: 10
     },
@@ -214,18 +215,20 @@ const styles = StyleSheet.create({
     },
     serviceBoxText: {
         fontFamily: 'SVN-PoppinsSemiBold',
-        color: '#2B2B2B',
+        color: colors.BLACK,
         marginLeft: 5
     },
     serviceBoxLabel: {
         fontFamily: 'SVN-Poppins',
         fontSize: 14,
-        color: '#2B2B2B'
+        color: colors.BLACK
     },
     serviceBoxValue: {
         fontFamily: 'SVN-Poppins',
         fontSize: 12,
-        color: '#AEAEB2',
-        marginVertical: 5
+        color: colors.GRAY_BOLD,
+        marginVertical: 5,
+        width: 140,
+        lineHeight: 24
     }
 });

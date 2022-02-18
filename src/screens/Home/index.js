@@ -15,21 +15,8 @@ import { useTranslation } from "react-i18next";
 import Promotion from './components/Promotion';
 import Feature from './components/Feature';
 import New from './components/New';
-
-const QR = require('../../../Resources/Images/QR.png');
-const search = require('../../../Resources/Images/search.png');
-const schedule = require('../../../Resources/Images/schedule.png');
-const injection = require('../../../Resources/Images/injection.png');
-const contact = require('../../../Resources/Images/contact.png');
-const service = require('../../../Resources/Images/service.png');
-const book = require('../../../Resources/Images/book.png');
-const credential = require('../../../Resources/Images/credential.png');
-const notification = require('../../../Resources/Images/notification.png');
-const star = require('../../../Resources/Images/star.png');
-const image = require('../../../Resources/Images/Image.png');
-const vn = require('../../../Resources/Images/vn.png');
-const world = require('../../../Resources/Images/world.png');
-const newImage = require('../../../Resources/Images/new.png');
+import { colors } from '../../styles';
+import { QRIcon, searchIcon, injectionIcon, scheduleIcon, contactIcon, serviceIcon, bookIcon, credentialIcon, starIcon, vnIcon, worldIcon, notificationPicture, promotionPicOne, promotionPicTwo, newPicOne, newPicTwo } from '../../assets'
 
 const Home = (props) => {
     const { t } = useTranslation()
@@ -39,56 +26,56 @@ const Home = (props) => {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
             title: 'Tiêu đề chương trình hot mới nhất tháng 12',
             subTitle: 'Mô tả ngắn chương trình hot mới nhất tháng 12',
-            image: image
+            image: promotionPicOne
         },
         {
             id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
             title: 'Tiêu đề chương trình hot mới nhất tháng 12',
             subTitle: 'Mô tả ngắn chương trình hot mới nhất tháng 12',
-            image: image
+            image: promotionPicTwo
         },
         {
             id: '58694a0f-3da1-471f-bd96-145571e29d72',
             title: 'Tiêu đề chương trình hot mới nhất tháng 12',
             subTitle: 'Mô tả ngắn chương trình hot mới nhất tháng 12',
-            image: image
+            image: promotionPicOne
         },
     ];
 
     const DATA_FEATURE = [
         {
             id: 1,
-            image: search,
+            image: searchIcon,
             text: t('search')
         },
         {
             id: 2,
-            image: schedule,
+            image: scheduleIcon,
             text: t('examSchedule')
         },
         {
             id: 3,
-            image: injection,
+            image: injectionIcon,
             text: t('injectionBook')
         },
         {
             id: 4,
-            image: contact,
+            image: contactIcon,
             text: t('contact')
         },
         {
             id: 5,
-            image: service,
+            image: serviceIcon,
             text: t('serviceHighlight')
         },
         {
             id: 6,
-            image: book,
+            image: bookIcon,
             text: t('handBook')
         },
         {
             id: 7,
-            image: credential,
+            image: credentialIcon,
             text: t('credentialCovid')
         }
     ]
@@ -96,19 +83,19 @@ const Home = (props) => {
     const DATA_NEW = [
         {
             id: 1,
-            image: newImage,
+            image: newPicOne,
             title: 'Tiêu đề chương trình hot mới nhất tháng 12',
             time: '22:10, 08/02/2022'
         },
         {
             id: 2,
-            image: newImage,
+            image: newPicTwo,
             title: 'Tiêu đề chương trình hot mới nhất tháng 13',
             time: '22:10, 08/02/2022'
         },
         {
             id: 3,
-            image: newImage,
+            image: newPicOne,
             title: 'Tiêu đề chương trình hot mới nhất tháng 14',
             time: '22:10, 08/02/2022'
         }
@@ -127,7 +114,7 @@ const Home = (props) => {
     );
 
     return (
-        <SafeAreaView style={{ backgroundColor: '#F8F8F8' }}>
+        <SafeAreaView style={{ backgroundColor: '#FCFCFC' }}>
             <StatusBar barStyle='dark-content' />
             <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -147,36 +134,41 @@ const Home = (props) => {
                             onPress={() => { }}
                             underlayColor='#F8F8F8'
                         >
-                            <Image source={QR} />
+                            <Image source={QRIcon} />
                         </TouchableHighlight>
                     </View>
                     <FlatList data={DATA_FEATURE} renderItem={renderItemFeature} pagingEnabled horizontal={true} scrollEnabled={true} showsHorizontalScrollIndicator={false} style={{ marginTop: 20 }} />
-                    <View style={{ marginTop: 10 }}>
+                    <View style={{ marginTop: 22 }}>
                         <View >
                             <Text style={styles.notificationTitle}>
                                 {t('importantNotification')}
                             </Text>
                         </View>
-                        <View style={styles.notificationBox}>
-                            <View >
-                                <Image source={notification} />
-                            </View>
+                        <View style={[styles.notificationBox, styles.shadowProp]}>
+                            <Image source={notificationPicture} />
                             <View style={styles.notificationBoxContent}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
-                                    <Image source={star} />
-                                    <Text style={{ color: '#FFCB55', fontSize: 13, fontFamily: 'SVN-Poppins' }}>
+                                <View style={{ flexDirection: 'row', marginBottom: 5 }}>
+                                    <Image source={starIcon} />
+                                    <Text style={{ color: '#FFCB55', fontSize: 12, fontFamily: 'SVN-Poppins', lineHeight: 18, marginLeft: 5 }}>
                                         TIN MỚI
                                     </Text>
                                 </View>
                                 <View style={{ width: 170 }}>
-                                    <Text style={styles.titlePromotion}>
+                                    <Text style={styles.titleNotification}>
                                         Tiêu đề chương trình hot mới nhất tháng 12
                                     </Text>
                                 </View>
                             </View>
                         </View>
                     </View>
-                    <View style={{ marginTop: 20 }}>
+                    <View
+                        style={{
+                            borderBottomColor: '#F7F7F7',
+                            borderBottomWidth: 1.5,
+                            marginVertical: 20
+                        }}
+                    />
+                    <View >
                         <View >
                             <Text style={styles.notificationTitle}>
                                 {t('promotion')}
@@ -196,11 +188,11 @@ const Home = (props) => {
                             <Text style={styles.notificationTitle}>
                                 {t('latestNews')}
                             </Text>
-                            <Text style={{ color: '#68BD45', fontSize: 12, fontFamily: 'SVN-Poppins', lineHeight: 25 }}>
+                            <Text style={{ color: colors.GREEN, fontSize: 12, fontFamily: 'SVN-Poppins', lineHeight: 25 }}>
                                 {t('more')}
                             </Text>
                         </View>
-                        <View style={styles.newsBox}>
+                        <View style={[styles.newsBox, styles.shadowProp]}>
                             <View style={styles.newsBoxContent}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 }}>
                                     <View >
@@ -217,52 +209,70 @@ const Home = (props) => {
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <View >
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                            <Image source={vn} style={{ marginRight: 10 }} />
+                                            <Image source={vnIcon} style={{ marginRight: 10 }} />
                                             <Text style={styles.country}>
                                                 {t('vietnam')}
                                             </Text>
                                         </View>
                                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                             <View style={{ marginRight: 20 }}>
-                                                <Text >
-                                                    {`1.778.976\n${t('infected')}`}
+                                                <Text style={[styles.newsValue, { color: '#F23E2C' }]}>
+                                                    1.778.976
+                                                </Text>
+                                                <Text style={styles.newsText}>
+                                                    {t('infected')}
                                                 </Text>
                                             </View>
                                             <View >
-                                                <Text >
-                                                    {`1.778.976\n${t('recover')}`}
+                                                <Text style={[styles.newsValue, { color: '#56D23F' }]}>
+                                                    1.778.976
+                                                </Text>
+                                                <Text style={styles.newsText}>
+                                                    {t('recover')}
                                                 </Text>
                                             </View>
                                         </View>
                                         <View style={{ marginTop: 10 }}>
-                                            <Text >
-                                                {`1.778.976\n${t('dead')}`}
+                                            <Text style={[styles.newsValue, { color: '#353535' }]}>
+                                                1.778.976
+                                            </Text>
+                                            <Text style={styles.newsText}>
+                                                {t('dead')}
                                             </Text>
                                         </View>
                                     </View>
                                     <View style={{ borderLeftWidth: 1.5, borderLeftColor: '#F7F7F7' }} />
                                     <View >
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                            <Image source={world} style={{ marginRight: 10 }} />
+                                            <Image source={worldIcon} style={{ marginRight: 10 }} />
                                             <Text style={styles.country}>
                                                 {t('world')}
                                             </Text>
                                         </View>
                                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                             <View style={{ marginRight: 20 }}>
-                                                <Text >
-                                                    {`1.778.976\n${t('infected')}`}
+                                                <Text style={[styles.newsValue, { color: '#F23E2C' }]}>
+                                                    1.778.976
+                                                </Text>
+                                                <Text style={styles.newsText}>
+                                                    {t('infected')}
                                                 </Text>
                                             </View>
                                             <View >
-                                                <Text >
-                                                    {`1.778.976\n${t('recover')}`}
+                                                <Text style={[styles.newsValue, { color: '#56D23F' }]}>
+                                                    1.778.976
+                                                </Text>
+                                                <Text style={styles.newsText}>
+                                                    {t('recover')}
                                                 </Text>
                                             </View>
                                         </View>
                                         <View style={{ marginTop: 10 }}>
-                                            <Text >
-                                                {`1.778.976\n${t('dead')}`}
+                                            <Text style={[styles.newsValue, { color: '#353535' }]}>
+                                                1.778.976
+                                            </Text>
+                                            <Text style={styles.newsText}>
+                                                {t('dead')}
                                             </Text>
                                         </View>
                                     </View>
@@ -271,7 +281,7 @@ const Home = (props) => {
                         </View>
                     </View>
                     <View style={{ marginTop: 20 }} >
-                        <FlatList data={DATA_NEW} style={{ height: 200, width: '100%' }} renderItem={renderItemNew} pagingEnabled horizontal={true} scrollEnabled={true} showsHorizontalScrollIndicator={false} />
+                        <FlatList data={DATA_NEW} renderItem={renderItemNew} pagingEnabled horizontal={true} scrollEnabled={true} showsHorizontalScrollIndicator={false} />
                     </View>
                 </View>
             </ScrollView>
@@ -292,13 +302,14 @@ const styles = StyleSheet.create({
     homeTitle: {
         fontFamily: 'SVN-PoppinsBold',
         fontSize: 28,
-        color: '#68BD45',
+        color: colors.GREEN,
         marginBottom: 7
     },
     homeSubTitle: {
         fontFamily: 'SVN-Poppins',
         fontSize: 14,
-        color: '#A4A4A6'
+        color: '#A4A4A6',
+        lineHeight: 19
     },
     QRIcon: {
         flexDirection: 'column',
@@ -306,14 +317,14 @@ const styles = StyleSheet.create({
     },
     notificationTitle: {
         fontSize: 20,
-        color: '#184A34',
+        color: colors.GREEN_BOLD,
         fontFamily: 'SVN-PoppinsSemiBold',
         marginBottom: 15,
         lineHeight: 25
     },
     notificationBox: {
-        width: 250,
-        backgroundColor: '#FFFFFF',
+        width: 265,
+        backgroundColor: colors.WHITE,
         height: 82,
         borderRadius: 14,
         flexDirection: 'row'
@@ -324,21 +335,21 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     newsBoxTitle: {
-        color: '#184A34',
+        color: colors.GREEN_BOLD,
         fontFamily: 'SVN-PoppinsSemiBold',
         fontSize: 18
     },
     newsBoxSubTitle: {
-        fontSize: 14,
+        fontSize: 10,
         fontFamily: 'SVN-Poppins',
         color: '#A4A4A6',
-        lineHeight: 20
+        lineHeight: 15
     },
     newsBox: {
         width: '100%',
-        height: 180,
-        backgroundColor: '#FFFFFF',
-        borderRadius: 12
+        backgroundColor: colors.WHITE,
+        borderRadius: 12,
+        paddingBottom: 16
     },
     newsBoxContent: {
         paddingHorizontal: 10,
@@ -347,8 +358,31 @@ const styles = StyleSheet.create({
     country: {
         fontFamily: 'SVN-PoppinsSemiBold',
         fontSize: 16,
-        color: '#2B2B2B',
+        color: colors.BLACK,
         lineHeight: 21
+    },
+    shadowProp: {
+        shadowColor: '#171717',
+        shadowOffset: { width: -2, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+    },
+    newsValue: {
+        fontSize: 14,
+        lineHeight: 19,
+        fontFamily: 'SVN-Poppins'
+    },
+    newsText: {
+        fontSize: 12,
+        lineHeight: 17,
+        fontFamily: 'SVN-Poppins',
+        color: colors.GRAY
+    },
+    titleNotification: {
+        fontFamily: 'SVN-Poppins',
+        fontSize: 14,
+        lineHeight: 19,
+        color: colors.BLACK
     }
 });
 

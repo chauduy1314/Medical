@@ -1,15 +1,17 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, StatusBar } from 'react-native';
 import React from 'react';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
-const twobell = require('../../../Resources/Images/twobell.png');
+import { colors } from '../../styles';
+import { twoBell } from '../../assets'
 
 const NotificationPage = () => {
+    const { t } = useTranslation()
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle='dark-content' />
             <View style={styles.boxContent}>
-                <Image source={twobell} />
+                <Image source={twoBell} />
                 <Text style={styles.boxText}>
                     {t('noNotification')}
                 </Text>
@@ -22,7 +24,7 @@ export default NotificationPage;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: colors.WHITE,
         height: '100%'
     },
     boxContent: {
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
         marginTop: 50
     },
     boxText: {
-        color: '#BFC6BD',
+        color: colors.GRAY,
         fontFamily: 'SVN-Poppins',
         fontSize: 14,
         marginTop: 20

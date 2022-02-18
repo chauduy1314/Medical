@@ -1,9 +1,9 @@
 import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import { initReactI18next } from 'react-i18next'
 import en from './src/translations/en.json'
 import vi from './src/translations/vi.json'
-import Backend from 'i18next-http-backend';
-import LanguageDetector from 'i18next-browser-languagedetector';
+import { getLocales } from 'react-native-localize'
+import moment from 'moment'
 
 const resource = {
     en: {
@@ -14,17 +14,34 @@ const resource = {
     },
 }
 
-i18n.use(Backend)
-    .use(LanguageDetector)
-    .use(initReactI18next)
+const languageDetector = {
+    type: 'languageDetector',
+    async: true,
+    detect: (language) => {
+        const persistedLocale = getLocales()[0].languageCode
+        language(persistedLocale)
+    },
+    init: () => { },
+    cacheUserLanguage: () => { },
+}
+
+i18n.on('languageChanged', function (lng) {
+    moment.locale(lng)
+})
+
+i18n.use(initReactI18next)
+    .use(languageDetector)
     .init({
         resources: resource,
+        interpolation: {
+            escapeValue: true,
+        },
+        react: {
+            useSuspense: false,
+        },
         fallbackLng: 'en',
         debug: true,
+    })
 
-        interpolation: {
-            escapeValue: false,
-        }
-    });
 
 export default i18n;

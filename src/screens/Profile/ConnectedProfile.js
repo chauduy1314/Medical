@@ -1,21 +1,19 @@
 import { StyleSheet, Text, View, SafeAreaView, TouchableHighlight, Image, StatusBar } from 'react-native';
 import React from 'react';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
-const avatar = require('../../../Resources/Images/face.png');
-const info = require('../../../Resources/Images/info.png');
-const love = require('../../../Resources/Images/love.png');
-const next = require('../../../Resources/Images/next.png');
-const plus = require('../../../Resources/Images/plus.png');
+import { colors } from '../../styles';
+import { face, infoIcon, loveIcon, nextIcon, plusIcon } from '../../assets'
 
 const ConnectedProfile = () => {
+    const { t } = useTranslation()
     return (
         <SafeAreaView >
             <StatusBar barStyle='light-content' />
             <View style={styles.secondLayer}>
                 <View style={styles.boxInfo}>
                     <View style={styles.boxInfoHeader}>
-                        <Image source={avatar} style={styles.boxInfoAvatar} />
+                        <Image source={face} style={styles.boxInfoAvatar} />
                         <Text style={styles.boxInfoName}>
                             Nguyễn Đặng Hoài Trang
                         </Text>
@@ -30,46 +28,46 @@ const ConnectedProfile = () => {
                     <View style={styles.boxInfoBody}>
                         <View style={styles.boxInfoRow}>
                             <View style={styles.rowBox}>
-                                <Image source={info} />
+                                <Image source={infoIcon} />
                                 <Text style={styles.boxRowText}>
                                     {t('personInfo')}
                                 </Text>
                             </View>
-                            <Image source={next} />
+                            <Image source={nextIcon} />
                         </View>
                         <View style={styles.boxInfoRow}>
                             <View style={styles.rowBox}>
-                                <Image source={love} />
+                                <Image source={loveIcon} />
                                 <Text style={styles.boxRowText}>
                                     {t('healthInfo')}
                                 </Text>
                             </View>
-                            <Image source={next} />
+                            <Image source={nextIcon} />
                         </View>
                         <View style={styles.boxInfoRow}>
                             <View style={styles.rowBox}>
-                                <Image source={love} />
+                                <Image source={loveIcon} />
                                 <Text style={styles.boxRowText}>
                                     {t('healthRecord')}
                                 </Text>
                             </View>
-                            <Image source={next} />
+                            <Image source={nextIcon} />
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <View style={styles.rowBox}>
-                                <Image source={love} />
+                                <Image source={loveIcon} />
                                 <Text style={styles.boxRowText}>
                                     {t('healthStatus')}
                                 </Text>
                             </View>
-                            <Image source={next} />
+                            <Image source={nextIcon} />
                         </View>
                     </View>
                 </View>
-                <View style={{ width: '100%', backgroundColor: '#F8F8F8', height: 10 }} />
+                <View style={{ width: '100%', backgroundColor: '#F8F8F8', height: 8 }} />
                 <View style={styles.boxAddProfile}>
                     <View style={styles.clickArea}>
-                        <Image source={plus} />
+                        <Image source={plusIcon} />
                         <Text style={styles.clickAreaText}>
                             {t('addProfilePlaceHolder')}
                         </Text>
@@ -103,7 +101,7 @@ const styles = StyleSheet.create({
     },
     boxInfo: {
         height: 360,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: colors.WHITE,
         width: '100%',
         borderTopLeftRadius: 48,
         borderTopRightRadius: 48
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
     boxInfoButton: {
         width: 100,
         height: 32,
-        backgroundColor: '#184A34',
+        backgroundColor: colors.GREEN_BOLD,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center'
@@ -132,7 +130,7 @@ const styles = StyleSheet.create({
     boxInfoButtonText: {
         fontFamily: 'SVN-PoppinsSemiBold',
         fontSize: 12,
-        color: '#FFFFFF'
+        color: colors.WHITE
     },
     boxInfoBody: {
         flexDirection: 'column',
@@ -143,7 +141,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderBottomWidth: 1.5,
-        borderColor: '#F7F7F7',
+        borderColor: colors.WHITE,
         marginBottom: 20,
         paddingBottom: 15
     },
@@ -151,7 +149,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         fontFamily: 'SVN-Poppins',
         fontSize: 14,
-        color: '#2B2B2B'
+        color: colors.BLACK
     },
     rowBox: {
         flexDirection: 'row',
@@ -160,7 +158,7 @@ const styles = StyleSheet.create({
     },
     boxAddProfile: {
         width: '100%',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: colors.WHITE,
         height: 150
     },
     clickArea: {
@@ -173,6 +171,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontSize: 14,
         fontFamily: 'SVN-Poppins',
-        color: '#BFC6BD'
+        color: colors.GRAY
     }
 });
