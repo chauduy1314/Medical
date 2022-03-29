@@ -8,9 +8,10 @@ import {
     Image,
     FlatList,
     StatusBar,
-    TouchableHighlight
+    TouchableHighlight,
 } from 'react-native';
 import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from 'react-redux'
 
 import Promotion from './components/Promotion';
 import Feature from './components/Feature';
@@ -303,7 +304,8 @@ const styles = StyleSheet.create({
         fontFamily: 'SVN-PoppinsBold',
         fontSize: 28,
         color: colors.GREEN,
-        marginBottom: 7
+        marginBottom: 4,
+        lineHeight: 33
     },
     homeSubTitle: {
         fontFamily: 'SVN-Poppins',

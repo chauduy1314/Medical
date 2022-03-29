@@ -74,5 +74,12 @@
     "appVersion": "Phiên bản ứng dụng",
     "logout": "Đăng xuất",
     "selectLanguage": "Chọn ngôn ngữ",
-    "meetingDate": "Ngày khám"
+    "meetingDate": "Ngày khám",
+    "noInternet": "Không có kết nối Internet. Xin vui lòng thử lại sau",
+    "loginSuccess": "Đăng nhập thành công",
+    "confirmLogout": "Bạn có muốn đăng xuất",
+    "cancel": "Huỷ",
+    "ok": "Đồng ý",
+    "gender": "Giới tính",
+    "save": "Lưu"
 }

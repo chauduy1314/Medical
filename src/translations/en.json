@@ -9,7 +9,7 @@
     "noAccount": "Don't have an account?",
     "registerNow": "Register now",
     "retypePassword": "Re-type your password",
-    "hasAccount": "Do you already have an account",
+    "hasAccount": "Do you already have an account?",
     "subTitleApp": "Health Monitoring Application",
     "search": "Search",
     "examSchedule": "Examination Schedule",
@@ -74,5 +74,12 @@
     "appVersion": "App Version",
     "logout": "Log Out",
     "selectLanguage": "Select your language",
-    "meetingDate": "Meeting Day"
+    "meetingDate": "Meeting Day",
+    "noInternet": "Internet Connection appears to be offline. Please try again later",
+    "loginSuccess": "Login Succeeded",
+    "confirmLogout": "Do you really want to log out?",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "gender": "Gender",
+    "save": "Save"
 }

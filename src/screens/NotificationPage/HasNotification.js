@@ -69,30 +69,10 @@ const styles = StyleSheet.create({
         backgroundColor: colors.WHITE,
         height: '100%',
         paddingHorizontal: 10,
-        paddingTop: 50,
     },
     newBox: {
         flexDirection: 'row',
         width: '85%'
-    },
-    notificationTitle: {
-        fontSize: 14,
-        fontFamily: 'SVN-Poppins',
-        lineHeight: 20
-    },
-    notificationSubtitle: {
-        fontSize: 10,
-        fontFamily: 'SVN-Poppins',
-        marginTop: 5,
-        color: colors.GRAY_BOLD
-    },
-    notificationBox: {
-        flexDirection: 'row',
-        width: '85%',
-        marginBottom: 20,
-        borderBottomWidth: 1.5,
-        borderBottomColor: colors.WHITE,
-        paddingBottom: 10
     },
     header: {
         fontFamily: 'SVN-PoppinsBold',

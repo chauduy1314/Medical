@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
         color: colors.GREEN,
         fontSize: 12,
         marginLeft: 5,
-        lineHeight: 17,
+        lineHeight: 19,
     }
 })

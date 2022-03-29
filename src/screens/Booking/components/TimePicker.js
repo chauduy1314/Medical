@@ -235,18 +235,19 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: colors.WHITE,
         fontFamily: 'SVN-PoppinsSemiBold',
-        lineHeight: 17
+        lineHeight: 22
     },
     unselectedTimeText: {
         color: colors.GRAY,
         fontSize: 12,
         fontFamily: 'SVN-PoppinsSemiBold',
-        lineHeight: 17
+        lineHeight: 22
     },
     selectedTimeSubText: {
         fontFamily: 'SVN-Poppins',
         fontSize: 10,
         color: colors.WHITE,
+        lineHeight: 17
     },
     unselectedTimeSubText: {
         color: colors.GRAY,
@@ -282,7 +283,8 @@ const styles = StyleSheet.create({
     dayBox: {
         flexDirection: 'row',
         paddingHorizontal: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        lineHeight: 22
     },
     dayBoxColumn: {
         flexDirection: 'row',

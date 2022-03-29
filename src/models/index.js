@@ -1,0 +1,8 @@
+export { Alert } from './Alert'
+export { Appointment } from './Appointment'
+export { LoginUser } from './LoginUser'
+export { NewsArticle } from './NewsArticle'
+export { NotificationArticle } from './NotificationArticle'
+export { Profile } from './Profile'
+export { PromotionArticle } from './PromotionArticle'
+export { UserDTO } from './UserDTO'

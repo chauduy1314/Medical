@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     SafeAreaView,
     TouchableHighlight,
@@ -8,15 +8,79 @@ import {
     TextInput,
     Image,
     TouchableOpacity,
+    Keyboard,
+    Alert
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useTranslation } from 'react-i18next';
+import NetInfo from '@react-native-community/netinfo'
+import { useForm, Controller } from "react-hook-form";
+import { useDispatch } from 'react-redux'
 
+import { loggingSuccess } from '../../features/authentication/authenticationSlice';
+import { getProfile } from '../../features/profile/profileSlice';
 import { colors } from '../../styles';
 import { hideIcon, userIcon, lockIcon } from '../../assets';
+import AuthenticationService from '../../services/AuthenticationService';
+import { AppAlert } from '../../helpers/AppAlert'
 
 const Login = ({ navigation }) => {
+    const [hidePassword, setHidePassword] = useState(true)
+    const dispatch = useDispatch()
     const { t } = useTranslation()
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            email: '',
+            password: ''
+        }
+    });
+
+    const doLogin = async (data) => {
+        Keyboard.dismiss()
+
+        const networkState = await NetInfo.fetch()
+        const isConnectedToInternet = networkState.isConnected
+        if (!isConnectedToInternet) {
+            return AppAlert.showNoInternetConnectionAlert()
+        }
+
+        try {
+            await AuthenticationService.login(data.email, data.password)
+                .then(() => dispatch(loggingSuccess()))
+                .then(() => dispatch(getProfile()))
+                .then(() =>
+                    Alert.alert(
+                        t('notification'),
+                        t('loginSuccess'),
+                        [
+                            {
+                                text: 'OK',
+                                onPress: () => navigation.navigate('MainTab'),
+                            }
+                        ]
+                    )
+                )
+        } catch (e) {
+            let errorTitle = 'Login Message'
+            const errorMsg = e.message
+            return Alert.alert(
+                errorTitle,
+                errorMsg,
+                [
+                    {
+                        text: 'Cancel',
+                        onPress: () => console.log('Cancel Pressed'),
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'OK',
+                        onPress: () => console.log('Ok Pressed'),
+                    },
+                ],
+                { cancelable: false }
+            )
+        }
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -31,21 +95,38 @@ const Login = ({ navigation }) => {
                     </Text>
                     <View style={styles.emailInput}>
                         <Image source={userIcon} style={styles.userIcon} />
-                        <TextInput
-                            placeholder={t('userAccountPlaceHolder')}
-                            style={styles.emailInputVal}
+                        <Controller
+                            control={control}
+                            render={({ field: { onChange, value } }) => (
+                                <TextInput
+                                    placeholder={t('userAccountPlaceHolder')}
+                                    style={styles.emailInputVal}
+                                    onChangeText={onChange}
+                                    value={value}
+                                />
+                            )}
+                            name="email"
                         />
                     </View>
                     <View style={styles.passwordInput}>
                         <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
                             <Image source={lockIcon} style={styles.lockIcon} />
-                            <TextInput
-                                placeholder={t('userPasswordPlaceHolder')}
-                                style={styles.passwordInputVal}
+                            <Controller
+                                control={control}
+                                render={({ field: { onChange, value } }) => (
+                                    <TextInput
+                                        placeholder={t('userPasswordPlaceHolder')}
+                                        style={styles.passwordInputVal}
+                                        secureTextEntry={hidePassword}
+                                        onChangeText={onChange}
+                                        value={value}
+                                    />
+                                )}
+                                name="password"
                             />
                         </View>
                         <TouchableHighlight
-                            onPress={() => { }}
+                            onPress={() => { setHidePassword(!hidePassword) }}
                             underlayColor={colors.WHITE}
                         >
                             <Image source={hideIcon} style={{ marginRight: 5 }} />
@@ -64,7 +145,7 @@ const Login = ({ navigation }) => {
                     <View>
                         <TouchableOpacity
                             style={styles.loginButton}
-                            onPress={() => navigation.navigate('MainTab')}
+                            onPress={handleSubmit(doLogin)}
                             underlayColor={colors.WHITE}
                         >
                             <Text style={styles.textLoginButton}>
@@ -74,21 +155,17 @@ const Login = ({ navigation }) => {
                     </View >
                 </View >
                 <View style={styles.registerBox}>
-                    <View >
-                        <Text style={styles.registerText}>
-                            {t('noAccount')}
+                    <Text style={styles.registerText}>
+                        {t('noAccount')}
+                    </Text>
+                    <TouchableHighlight
+                        underlayColor={colors.WHITE}
+                        onPress={() => navigation.navigate('Register')}
+                    >
+                        <Text style={styles.registerTextPress}>
+                            {t('registerNow')}
                         </Text>
-                    </View>
-                    <View >
-                        <TouchableHighlight
-                            underlayColor={colors.WHITE}
-                            onPress={() => navigation.navigate('Register')}
-                        >
-                            <Text style={styles.registerTextPress}>
-                                {t('registerNow')}
-                            </Text>
-                        </TouchableHighlight>
-                    </View>
+                    </TouchableHighlight>
                 </View>
             </KeyboardAwareScrollView>
         </SafeAreaView>
@@ -185,7 +262,7 @@ const styles = StyleSheet.create({
         color: colors.GREEN,
         fontFamily: 'SVN-PoppinsBold',
         marginLeft: 3,
-        lineHeight: 20
+        lineHeight: 20,
     },
     registerText: {
         color: colors.GREEN,

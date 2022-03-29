@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     inputSelectedContainer: {
         flexDirection: 'row',
         paddingBottom: 10,
-        height: 55,
+        height: 60,
         marginVertical: 5,
         borderWidth: 1,
         padding: 10,
@@ -185,7 +185,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     inputSelected: {
-        flex: 1
+        flex: 1,
+        fontSize: 14,
+        lineHeight: 19
     },
     reason: {
         height: 90,

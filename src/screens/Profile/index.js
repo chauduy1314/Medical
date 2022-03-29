@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View, SafeAreaView, TouchableHighlight, Image, StatusBar, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux'
 
 import { colors } from '../../styles';
 import { face, infoIcon, loveIcon, nextIcon, plusIcon } from '../../assets'
 
 const Profile = ({ navigation }) => {
+    const userProfile = useSelector((state) => state.profile)
+    console.log('userProfile', userProfile)
     const { t } = useTranslation()
 
     return (
@@ -16,7 +19,7 @@ const Profile = ({ navigation }) => {
                     <View style={styles.boxInfoHeader}>
                         <Image source={face} style={styles.boxInfoAvatar} />
                         <Text style={styles.boxInfoName}>
-                            Nguyễn Đặng Hoài Trang
+                            {userProfile.profile.fullName}
                         </Text>
                         <TouchableOpacity style={styles.boxInfoButton}
                             onPress={() => { }}
@@ -27,7 +30,7 @@ const Profile = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.boxInfoBody}>
-                        <View style={styles.boxInfoRow}>
+                        <View style={[styles.boxInfoRow, { borderBottomWidth: 1.5, borderColor: '#F7F7F7', paddingBottom: 15 }]}>
                             <View style={styles.rowBox}>
                                 <Image source={infoIcon} />
                                 <Text style={styles.boxRowText}>
@@ -36,7 +39,7 @@ const Profile = ({ navigation }) => {
                             </View>
                             <Image source={nextIcon} />
                         </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <View style={styles.boxInfoRow}>
                             <View style={styles.rowBox}>
                                 <Image source={loveIcon} />
                                 <Text style={styles.boxRowText}>
@@ -79,7 +82,6 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     secondLayer: {
-        height: 200,
         backgroundColor: colors.GREEN,
         position: 'absolute',
         zIndex: 2,
@@ -87,7 +89,6 @@ const styles = StyleSheet.create({
         marginTop: 125
     },
     boxInfo: {
-        height: 240,
         backgroundColor: colors.WHITE,
         width: '100%',
         borderTopLeftRadius: 48,
@@ -128,10 +129,7 @@ const styles = StyleSheet.create({
     boxInfoRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderBottomWidth: 1.5,
-        borderColor: colors.WHITE,
         marginBottom: 20,
-        paddingBottom: 15
     },
     boxRowText: {
         marginLeft: 10,

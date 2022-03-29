@@ -4,7 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image, TouchableHighlight, TouchableOpacity, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { Provider } from 'react-redux'
 
+import { store } from './src/store';
 import LandingPage from './src/screens/LandingPage'
 import Login from './src/screens/Login'
 import Register from './src/screens/Register'
@@ -14,6 +16,7 @@ import ConnectedProfile from './src/screens/Profile/ConnectedProfile';
 import HealthProfile from './src/screens/Profile/HealthProfile'
 import Booking from './src/screens/Booking'
 import NotificationPage from './src/screens/NotificationPage'
+import ProfileSetting from './src/screens/Profile/ProfileSetting';
 import Account from './src/screens/Account'
 import HasNotification from './src/screens/NotificationPage/HasNotification'
 import DetailExamination from './src/screens/Profile/DetailExamination';
@@ -185,36 +188,39 @@ const App = () => {
     const { t } = useTranslation()
 
     return (
-        <NavigationContainer theme={MyTheme} >
-            <Stack.Navigator>
-                <Stack.Screen name="Landing" component={LandingPage} options={{ headerShown: false }} />
-                <Stack.Screen name="Login" component={Login} options={{ headerBackTitle: '', headerTitle: '', headerTintColor: colors.GRAY, headerShadowVisible: false }} />
-                <Stack.Screen name="Register" component={Register} options={{ headerBackTitle: '', headerTitle: '', headerTintColor: colors.GRAY, headerShadowVisible: false }} />
-                <Stack.Screen name="MainTab" component={MainTab} options={{ headerShown: false }} />
-                <Stack.Screen name="HealthProfile" component={HealthProfile} options={{
-                    headerTitle: t('healthRecord'),
-                    headerBackTitle: '',
-                    headerTintColor: colors.GRAY,
-                    headerShadowVisible: false,
-                    headerTitleStyle: {
-                        fontSize: 18,
-                        fontFamily: 'SVN-PoppinsBold',
-                        color: colors.BLACK
-                    }
-                }} />
-                <Stack.Screen name="DetailExamination" component={DetailExamination} options={{
-                    headerTitle: 'Thông Tin Khám',
-                    headerBackTitle: '',
-                    headerTintColor: colors.GRAY,
-                    headerShadowVisible: false,
-                    headerTitleStyle: {
-                        fontSize: 18,
-                        fontFamily: 'SVN-PoppinsBold',
-                        color: colors.BLACK
-                    }
-                }} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Provider store={store}>
+            <NavigationContainer theme={MyTheme} >
+                <Stack.Navigator>
+                    <Stack.Screen name="Landing" component={LandingPage} options={{ headerShown: false }} />
+                    <Stack.Screen name="Login" component={Login} options={{ headerBackTitle: '', headerTitle: '', headerTintColor: colors.GRAY, headerShadowVisible: false }} />
+                    <Stack.Screen name="Register" component={Register} options={{ headerBackTitle: '', headerTitle: '', headerTintColor: colors.GRAY, headerShadowVisible: false }} />
+                    <Stack.Screen name="MainTab" component={MainTab} options={{ headerShown: false }} />
+                    <Stack.Screen name="ProfileSetting" component={ProfileSetting} option={{ headerShown: false }} />
+                    <Stack.Screen name="HealthProfile" component={HealthProfile} options={{
+                        headerTitle: t('healthRecord'),
+                        headerBackTitle: '',
+                        headerTintColor: colors.GRAY,
+                        headerShadowVisible: false,
+                        headerTitleStyle: {
+                            fontSize: 18,
+                            fontFamily: 'SVN-PoppinsBold',
+                            color: colors.BLACK
+                        }
+                    }} />
+                    <Stack.Screen name="DetailExamination" component={DetailExamination} options={{
+                        headerTitle: 'Thông Tin Khám',
+                        headerBackTitle: '',
+                        headerTintColor: colors.GRAY,
+                        headerShadowVisible: false,
+                        headerTitleStyle: {
+                            fontSize: 18,
+                            fontFamily: 'SVN-PoppinsBold',
+                            color: colors.BLACK
+                        }
+                    }} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </Provider>
     );
 }
 

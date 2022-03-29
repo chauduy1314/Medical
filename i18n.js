@@ -32,6 +32,7 @@ i18n.on('languageChanged', function (lng) {
 i18n.use(initReactI18next)
     .use(languageDetector)
     .init({
+        compatibilityJSON: 'v3',
         resources: resource,
         interpolation: {
             escapeValue: true,

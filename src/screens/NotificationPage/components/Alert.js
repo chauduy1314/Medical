@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         width: '85%',
         marginBottom: 20,
         borderBottomWidth: 1.5,
-        borderBottomColor: colors.WHITE,
+        borderBottomColor: '#F7F7F7',
         paddingBottom: 10
     },
     notificationTitle: {

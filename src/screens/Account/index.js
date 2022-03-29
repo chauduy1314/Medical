@@ -1,13 +1,16 @@
-import { StyleSheet, Text, View, SafeAreaView, Image, TouchableHighlight, FlatList, ScrollView, StatusBar, TouchableOpacity, Modal } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, TouchableHighlight, FlatList, ScrollView, StatusBar, TouchableOpacity, Modal, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from 'react-redux';
 
+import Credentials from '../../helpers/Credentials';
 import { colors } from '../../styles';
 import RadioButton from '../../components/RadioButton';
 import { avatarAccount, editIcon, logOutIcon, moreInfoIcon, settingIcon, languageIcon, securityIcon, supportIcon, privateIcon, applicationIcon, feedbackIcon, versionIcon, outIcon, nextIcon } from '../../assets'
 
 const Account = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false)
+    const userProfile = useSelector((state) => state.profile)
     const { t, i18n } = useTranslation();
     const currentLanguage = i18n.language
 
@@ -52,6 +55,23 @@ const Account = ({ navigation }) => {
         <Item {...item} />
     );
 
+    const logOut = () => {
+        Alert.alert(
+            t('logout'),
+            t('confirmLogout'),
+            [
+                { text: t('cancel'), onPress: () => { }, style: 'cancel' },
+                {
+                    text: t('ok'),
+                    onPress: async () => {
+                        await Credentials.deletePassword()
+                        await navigation.navigate('Login')
+                    },
+                },
+            ]
+        )
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle='dark-content' />
@@ -61,7 +81,7 @@ const Account = ({ navigation }) => {
                 <View style={styles.headerBox}>
                     <View >
                         <TouchableHighlight
-                            onPress={() => { navigation.navigate('Login') }}
+                            onPress={logOut}
                             underlayColor='#F8F8F8'
                         >
                             <Image source={logOutIcon} />
@@ -70,7 +90,7 @@ const Account = ({ navigation }) => {
                     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                         <Image source={avatarAccount} />
                         <Text style={styles.headerBoxText}>
-                            Nguyễn Đặng Hoài Trang
+                            {userProfile.profile.fullName}
                         </Text>
                         <TouchableHighlight
                             onPress={() => { }}
@@ -110,15 +130,19 @@ const Account = ({ navigation }) => {
                             </Text>
                         </View>
                         <View >
-                            <View style={styles.settingBoxFirstItem}>
-                                <View style={styles.settingBoxColumn}>
-                                    <Image source={settingIcon} />
-                                    <Text style={styles.settingBoxItemText}>
-                                        {t('accountSetting')}
-                                    </Text>
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate('ProfileSetting')}
+                            >
+                                <View style={styles.settingBoxFirstItem}>
+                                    <View style={styles.settingBoxColumn}>
+                                        <Image source={settingIcon} />
+                                        <Text style={styles.settingBoxItemText}>
+                                            {t('accountSetting')}
+                                        </Text>
+                                    </View>
+                                    <Image source={nextIcon} />
                                 </View>
-                                <Image source={nextIcon} />
-                            </View>
+                            </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => setModalVisible(true)}
                             >
@@ -201,7 +225,7 @@ const Account = ({ navigation }) => {
                     </View>
                 </View>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('Login')}
+                    onPress={logOut}
                 >
                     <View style={styles.boxContainer}>
                         <View style={styles.boxRow}>

@@ -46,6 +46,7 @@ const Register = ({ navigation }) => {
                             <TextInput
                                 placeholder={t('userPasswordPlaceHolder')}
                                 style={styles.passwordInputVal}
+                                secureTextEntry={true}
                             />
                         </View>
                         <TouchableHighlight
@@ -61,6 +62,7 @@ const Register = ({ navigation }) => {
                             <TextInput
                                 placeholder={t('retypePassword')}
                                 style={styles.passwordInputVal}
+                                secureTextEntry={true}
                             />
                         </View>
                         <TouchableHighlight
